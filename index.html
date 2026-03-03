@@ -6,13 +6,13 @@
   <meta name="theme-color" content="#F2F4F7" />
   <title>Calculadora LOX</title>
 
-  <!-- Usa tu archivo real -->
   <link rel="stylesheet" href="stiletto.css" />
 </head>
 
 <body>
 
 <header class="header">
+  <img src="img/frasal.png" alt="Frasal" class="logo">
   <h1 class="title">Calculadora LOX</h1>
   <button class="toggle-theme" onclick="toggleDarkMode()">Modo</button>
 </header>
@@ -24,18 +24,13 @@
     <h2 class="section-title">Panel de operación</h2>
 
     <label>Isotanque</label>
-    <select id="isotanque">
-      <option>Isotanque 1</option>
-      <option>Isotanque 2</option>
-      <option>Isotanque 3</option>
-      <option>Isotanque 4</option>
-    </select>
+    <select id="isotanque"></select>
 
     <div class="stock-label">Stock isotanque seleccionado</div>
     <div class="stock-value" id="stockSeleccionado">0.00 m³</div>
 
     <div class="stock-board">
-      Stock a bordo: <strong id="stockTotal">15305.00 m³</strong>
+      Stock a bordo: <strong id="stockTotal">0.00 m³</strong>
     </div>
 
     <label>Centro</label>
@@ -60,6 +55,15 @@
     <button id="btnCompleto">Descargar isotanque completo</button>
   </section>
 
+  <!-- CONFIGURAR CAMPAÑA -->
+  <section class="card">
+    <h2 class="section-title">Configurar campaña</h2>
+
+    <div id="configCampania">
+      <!-- Tu contenido original de campaña va aquí -->
+    </div>
+  </section>
+
   <!-- CONTROL E HISTORIAL -->
   <section class="card">
     <h2 class="section-title">Control e historial</h2>
@@ -71,9 +75,7 @@
       <button id="btnNueva">Nueva campaña</button>
     </div>
 
-    <div class="historial" id="historial">
-      <!-- Tu JS llenará esto -->
-    </div>
+    <div class="historial" id="historial"></div>
   </section>
 
 </main>
