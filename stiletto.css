@@ -1,18 +1,18 @@
 :root {
 
-  --bg-main: #EEF2F7;
+  --bg-main: #E9EDF3;          /* Fondo más profundo y técnico */
   --bg-card: #FFFFFF;
-  --bg-soft: #F4F6FA;
+  --bg-soft: #F3F5F9;
 
-  --text-primary: #1F2937;
+  --text-primary: #111827;
   --text-secondary: #6B7280;
 
-  --border-soft: #E5E7EB;
+  --border-soft: #E6EAF0;
 
   --accent: #2563EB;
 
   --btn-bg: #E5E7EB;
-  --btn-hover: #D1D5DB;
+  --btn-hover: #D6D9DF;
 }
 
 * {
@@ -27,29 +27,29 @@ body {
 }
 
 .layout {
-  max-width: 620px;
-  margin: 40px auto;
-  padding: 0 20px;
+  max-width: 640px;
+  margin: 60px auto;   /* más aire superior */
+  padding: 0 22px;
 }
 
 /* LOGO */
 .logo {
-  width: 140px;
+  width: 150px;
   display: block;
-  margin: 10px auto 30px auto;
+  margin: 0 auto 40px auto; /* más separación */
 }
 
 /* =============================
-   TARJETA PRINCIPAL (SUPERIOR)
+   TARJETA PRINCIPAL
 ============================= */
 
 .cardMain {
   background: var(--bg-card);
-  border-radius: 24px;
-  padding: 32px;
-  margin-bottom: 30px;
-  border: 1px solid var(--border-soft);
-  box-shadow: 0 12px 28px rgba(0,0,0,0.05);
+  border-radius: 26px;
+  padding: 38px;
+  margin-bottom: 40px;
+  border: none; /* eliminamos borde duro */
+  box-shadow: 0 20px 40px rgba(17, 24, 39, 0.06);
 }
 
 /* STOCK A BORDO */
@@ -57,8 +57,8 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 22px;
-  font-size: 1rem;
+  margin-bottom: 28px;
+  font-size: 1.05rem;
   color: var(--text-secondary);
 }
 
@@ -73,32 +73,35 @@ body {
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
-  margin-bottom: 26px;
+  margin-bottom: 32px;
 }
 
 .isoTitle {
-  font-size: 1.9rem;
+  font-size: 2rem;
   font-weight: 700;
 }
 
 .arrow {
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   color: var(--text-secondary);
 }
 
 /* TARJETA INTERNA VALOR */
+
 .isoValueBox {
   background: var(--bg-soft);
-  border-radius: 22px;
-  padding: 34px;
-  border: 1px solid var(--border-soft);
+  border-radius: 24px;
+  padding: 40px;
+  border: none;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
 }
 
 .isoValue {
-  font-size: 3.2rem;
+  font-size: clamp(2.6rem, 6vw, 3.4rem);
   font-weight: 700;
   color: var(--accent);
-  margin-bottom: 12px;
+  white-space: nowrap; /* evita salto de línea */
+  margin-bottom: 14px;
 }
 
 .isoSub {
@@ -112,85 +115,98 @@ body {
 
 .card {
   background: var(--bg-card);
-  border-radius: 22px;
-  padding: 28px;
-  margin-bottom: 30px;
-  border: 1px solid var(--border-soft);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+  border-radius: 24px;
+  padding: 32px;
+  margin-bottom: 40px;
+  border: none;
+  box-shadow: 0 14px 30px rgba(17, 24, 39, 0.05);
 }
 
 h2 {
   margin-top: 0;
-  margin-bottom: 20px;
-  font-size: 1.4rem;
+  margin-bottom: 22px;
+  font-size: 1.5rem;
 }
 
 /* FORMULARIOS */
 
 label {
   display: block;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   color: var(--text-secondary);
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 
 input {
   width: 100%;
-  padding: 16px;
-  border-radius: 16px;
+  padding: 18px;
+  border-radius: 18px;
   border: 1px solid var(--border-soft);
   background: var(--bg-soft);
-  margin-bottom: 18px;
+  margin-bottom: 20px;
   font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--accent);
+  background: #ffffff;
 }
 
 /* EQUIVALENTE */
 .equivalente {
   font-size: 0.9rem;
   color: var(--text-secondary);
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
 /* RESULTADO */
 .resultado {
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   font-weight: 700;
-  margin: 22px 0;
+  margin: 26px 0;
 }
 
 /* BOTONES */
 
 .btn {
   width: 100%;
-  padding: 16px;
-  border-radius: 18px;
-  border: 1px solid var(--border-soft);
+  padding: 18px;
+  border-radius: 20px;
+  border: none;
   background: var(--btn-bg);
   cursor: pointer;
-  margin-bottom: 14px;
+  margin-bottom: 16px;
   font-size: 1rem;
+  transition: background 0.2s ease, transform 0.05s ease;
 }
 
 .btn:hover {
   background: var(--btn-hover);
 }
 
+.btn:active {
+  transform: scale(0.98);
+}
+
 .btnSec {
   flex: 1;
-  padding: 14px;
-  border-radius: 16px;
-  border: 1px solid var(--border-soft);
+  padding: 16px;
+  border-radius: 18px;
+  border: none;
   background: var(--btn-bg);
   cursor: pointer;
+  transition: background 0.2s ease;
 }
 
 .adminRow {
   display: flex;
-  gap: 12px;
-  margin-bottom: 16px;
+  gap: 14px;
+  margin-bottom: 18px;
 }
 
 .historial {
   font-size: 0.9rem;
-  line-height: 1.5;
+  line-height: 1.6;
 }
