@@ -19,12 +19,8 @@ const tabla = [
 // ESTADO
 // =====================
 let ultimoTotal = 0;
-
-let stockPorIsotanque =
-  JSON.parse(localStorage.getItem("stockPorIsotanque")) || [0,0,0,0];
-
-let historial =
-  JSON.parse(localStorage.getItem("historialDescargas")) || [];
+let stockPorIsotanque = JSON.parse(localStorage.getItem("stockPorIsotanque")) || [0,0,0,0];
+let historial = JSON.parse(localStorage.getItem("historialDescargas")) || [];
 
 // =====================
 // UTILIDADES
@@ -35,8 +31,7 @@ function totalBordo(){
 
 function isotanqueActualIndex(){
   const select = document.getElementById("isotanqueSelect");
-  if(!select) return 0;
-  return Number(select.value)-1;
+  return select ? Number(select.value)-1 : 0;
 }
 
 function guardarStock(){
@@ -51,7 +46,6 @@ function guardarHistorial(){
 // COLOR DINÁMICO
 // =====================
 function actualizarColorIsotanque(valor){
-
   const el = document.getElementById("stockIsotanque");
   if(!el) return;
 
@@ -70,7 +64,6 @@ function actualizarColorIsotanque(valor){
 // ACTUALIZAR UI
 // =====================
 function actualizarStockUI(){
-
   const idx = isotanqueActualIndex();
   const stockActual = stockPorIsotanque[idx] || 0;
 
@@ -112,12 +105,8 @@ function interpolar(mm){
 // CÁLCULO
 // =====================
 function actualizar(){
-
-  const nivelA = document.getElementById("nivelA")?.value;
-  const nivelB = document.getElementById("nivelB")?.value;
-
-  const A = interpolar(nivelA);
-  const B = interpolar(nivelB);
+  const A = interpolar(document.getElementById("nivelA")?.value);
+  const B = interpolar(document.getElementById("nivelB")?.value);
 
   const m3A = document.getElementById("m3A");
   const m3B = document.getElementById("m3B");
@@ -139,10 +128,25 @@ function actualizar(){
 }
 
 // =====================
+// HISTORIAL
+// =====================
+function renderHistorial(){
+  const cont = document.getElementById("historial");
+  if(!cont) return;
+  cont.innerHTML = "";
+
+  [...historial].reverse().forEach(r=>{
+    const div = document.createElement("div");
+    div.textContent =
+      `${r.fecha} — ${r.centro} — Iso ${r.isotanque} — ${r.tipo} — ${r.volumen.toFixed(2)} m³`;
+    cont.appendChild(div);
+  });
+}
+
+// =====================
 // REGISTRAR
 // =====================
 function registrarDescarga(volumen,tipo){
-
   if(volumen<=0) return;
 
   const centro=document.getElementById("centro")?.value.trim();
@@ -169,6 +173,7 @@ function registrarDescarga(volumen,tipo){
 
   guardarHistorial();
   actualizarStockUI();
+  renderHistorial();
 }
 
 function registrarPorTramo(){
@@ -184,7 +189,53 @@ function descargarIsotanqueCompleto(){
 }
 
 // =====================
-// EVENTOS
+// ROLLBACK
+// =====================
+function rollback(){
+  if(!historial.length) return alert("Nada que deshacer.");
+
+  const ultimo = historial.pop();
+  stockPorIsotanque[ultimo.isotanque-1]+=ultimo.volumen;
+
+  guardarStock();
+  guardarHistorial();
+  actualizarStockUI();
+  renderHistorial();
+}
+
+// =====================
+// NUEVA CAMPAÑA
+// =====================
+function nuevaCampana(){
+  if(!confirm("¿Iniciar nueva campaña?")) return;
+
+  stockPorIsotanque=[0,0,0,0];
+  historial=[];
+
+  guardarStock();
+  guardarHistorial();
+  actualizarStockUI();
+  renderHistorial();
+}
+
+// =====================
+// EXPORTAR
+// =====================
+function copiarHistorial(){
+  if(!historial.length) return alert("No hay descargas.");
+
+  let texto="Historial descargas LOX\n\n";
+  historial.forEach(r=>{
+    texto+=`${r.fecha} - ${r.centro} - Iso ${r.isotanque} - ${r.volumen.toFixed(2)} m³\n`;
+  });
+
+  navigator.clipboard.writeText(texto)
+    .then(()=>alert("Historial copiado"))
+    .catch(()=>alert("No se pudo copiar"));
+}
+
+// =====================
+// INICIO
 // =====================
 window.addEventListener("load",()=>{
 
@@ -192,6 +243,9 @@ window.addEventListener("load",()=>{
   document.getElementById("nivelB")?.addEventListener("input",actualizar);
   document.getElementById("registrar")?.addEventListener("click",registrarPorTramo);
   document.getElementById("descargaCompleta")?.addEventListener("click",descargarIsotanqueCompleto);
+  document.getElementById("rollback")?.addEventListener("click",rollback);
+  document.getElementById("nuevaCampana")?.addEventListener("click",nuevaCampana);
+  document.getElementById("exportar")?.addEventListener("click",copiarHistorial);
 
   document.getElementById("isotanqueSelect")?.addEventListener("change",function(){
     const isoTitulo=document.getElementById("isoTitulo");
@@ -200,4 +254,5 @@ window.addEventListener("load",()=>{
   });
 
   actualizarStockUI();
+  renderHistorial();
 });
