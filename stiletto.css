@@ -1,56 +1,71 @@
 :root {
-  --bg-main: #F2F4F7;
+
+  --bg-main: #F3F5F8;
   --bg-card: #FFFFFF;
-  --bg-input: #F8FAFC;
-  --text-primary: #1C2430;
+  --bg-soft: #F7F9FC;
+
+  --text-primary: #1F2937;
   --text-secondary: #6B7280;
+
   --border-soft: #E5E7EB;
-  --accent-highlight: #2563EB;
+
+  --accent: #2563EB;
+
   --btn-bg: #E5E7EB;
   --btn-hover: #D1D5DB;
 }
 
 body {
   margin: 0;
-  font-family: system-ui, sans-serif;
+  font-family: system-ui, -apple-system, sans-serif;
   background: var(--bg-main);
   color: var(--text-primary);
 }
 
 .layout {
-  max-width: 640px;
+  max-width: 620px;
   margin: 30px auto;
-  padding: 0 20px;
+  padding: 0 18px;
 }
 
+/* LOGO */
 .logo {
-  width: 120px;
+  width: 130px;
   display: block;
-  margin: 20px auto 10px auto;
+  margin: 20px auto 25px auto;
 }
 
-h1 {
+/* STOCK A BORDO ARRIBA */
+.stockBordoTop {
+  font-size: 1.1rem;
+  margin-bottom: 20px;
   text-align: center;
-  font-weight: 600;
-  margin-bottom: 30px;
 }
 
+.stockBordoTop strong {
+  font-weight: 600;
+}
+
+/* TARJETAS */
 .cardSection {
   background: var(--bg-card);
-  border-radius: 20px;
+  border-radius: 22px;
   padding: 24px;
-  margin-bottom: 24px;
+  margin-bottom: 26px;
   border: 1px solid var(--border-soft);
 }
 
-/* HEADER */
-.panelHeader {
+/* HEADER ISOTANQUE */
+.isoHeaderRow {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 1.3rem;
-  font-weight: 600;
   margin-bottom: 20px;
+}
+
+.isoTitulo {
+  font-size: 1.6rem;
+  font-weight: 600;
 }
 
 .isoTabs {
@@ -59,47 +74,58 @@ h1 {
 }
 
 .isoTab {
-  width: 32px;
-  height: 32px;
+  width: 30px;
+  height: 30px;
   border-radius: 8px;
   border: 1px solid var(--border-soft);
-  background: var(--bg-input);
-  font-weight: 600;
+  background: var(--bg-soft);
   cursor: pointer;
+  font-weight: 600;
 }
 
 .isoTab.active {
-  background: var(--accent-highlight);
+  background: var(--accent);
   color: white;
+  border-color: var(--accent);
 }
 
-/* STOCK */
-.stockMega {
-  font-size: 2.6rem;
+/* TARJETA INTERNA VALOR */
+.isoValueCard {
+  background: var(--bg-soft);
+  border-radius: 18px;
+  padding: 22px;
+  margin-bottom: 24px;
+  border: 1px solid var(--border-soft);
+}
+
+.isoValorGrande {
+  font-size: 2.8rem;
   font-weight: 600;
-  color: var(--accent-highlight);
+  color: var(--accent);
+  margin-bottom: 6px;
 }
 
-.stockBoard {
+.isoSubtexto {
   font-size: 0.9rem;
   color: var(--text-secondary);
 }
 
-/* INPUTS */
+/* FORM */
 label {
+  display: block;
   font-size: 0.85rem;
   color: var(--text-secondary);
-  display: block;
   margin-bottom: 6px;
 }
 
 input {
   width: 100%;
-  padding: 12px;
+  padding: 14px;
   border-radius: 14px;
   border: 1px solid var(--border-soft);
-  background: var(--bg-input);
-  margin-bottom: 16px;
+  background: var(--bg-soft);
+  margin-bottom: 18px;
+  font-size: 1rem;
 }
 
 /* RESULTADO */
@@ -112,12 +138,13 @@ input {
 /* BOTONES */
 .btn {
   width: 100%;
-  padding: 14px;
-  border-radius: 14px;
+  padding: 15px;
+  border-radius: 16px;
   border: 1px solid var(--border-soft);
   background: var(--btn-bg);
-  margin-bottom: 12px;
   cursor: pointer;
+  margin-bottom: 12px;
+  font-size: 0.95rem;
 }
 
 .btn:hover {
@@ -141,4 +168,5 @@ input {
 
 .historial {
   font-size: 0.85rem;
+  line-height: 1.4;
 }
