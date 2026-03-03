@@ -18,32 +18,44 @@
 
   <!-- PANEL DE OPERACIÓN -->
   <section class="panel cardSection panelOperacion">
-    <h2>Panel de operación</h2>
 
-    <label for="isotanqueSelect">Isotanque</label>
-    <select id="isotanqueSelect">
+    <h2 class="panelHeader">
+      <span id="isoTitulo">Isotanque 1</span>
+
+      <div class="isoTabs">
+        <button class="isoTab active" data-iso="1">1</button>
+        <button class="isoTab" data-iso="2">2</button>
+        <button class="isoTab" data-iso="3">3</button>
+        <button class="isoTab" data-iso="4">4</button>
+      </div>
+    </h2>
+
+    <!-- SELECT OCULTO (JS DEPENDE DE ESTO) -->
+    <select id="isotanqueSelect" style="display:none;">
       <option value="1">Isotanque 1</option>
       <option value="2">Isotanque 2</option>
       <option value="3">Isotanque 3</option>
       <option value="4">Isotanque 4</option>
     </select>
 
-    <div class="stockBlock">
-      <div id="stockIsotanque" class="stockPrincipal">
-        Stock isotanque seleccionado: —
+    <div class="stockBigBlock">
+      <div id="stockIsotanque" class="stockMega">
+        0.00 m³
       </div>
 
-      <div id="saldoRestante" class="stockSecundario">
+      <div id="saldoRestante" class="stockBoard">
         Stock a bordo: —
       </div>
     </div>
 
     <label for="centro">Centro</label>
     <input id="centro" type="text" placeholder="Ej: C. Contao">
+
   </section>
 
   <!-- ZONA DE OPERACIÓN -->
   <section class="panel cardSection zonaOperacion">
+
     <h2>Zona de operación</h2>
 
     <div class="inputGroup">
@@ -69,6 +81,7 @@
     <button id="descargaCompleta" class="btn">
       Descargar isotanque completo
     </button>
+
   </section>
 
   <!-- CONFIGURAR CAMPAÑA -->
@@ -99,9 +112,7 @@
   <section class="panel cardSection panelControl">
     <h2>Control e historial</h2>
 
-    <button id="exportar" class="btn">
-      Copiar historial
-    </button>
+    <button id="exportar" class="btn">Copiar historial</button>
 
     <div class="adminRow">
       <button id="rollback" class="btnSec">Deshacer</button>
