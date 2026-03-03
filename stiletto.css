@@ -1,131 +1,100 @@
 /* =========================
-   VARIABLES BASE
+   VARIABLES
 ========================= */
 
 :root {
 
-  /* Tipografía */
-  --font-main: "Inter", system-ui, -apple-system, sans-serif;
+  /* Modo claro */
+  --bg-main: #F2F4F7;
+  --bg-card: #FFFFFF;
+  --bg-input: #F7F9FB;
 
-  /* Light mode */
-  --bg: #f4f6f8;
-  --card-bg: #ffffff;
-  --card-border: #e2e6ea;
+  --text-primary: #1C2430;
+  --text-secondary: #6B7280;
 
-  --text-primary: #1c2430;
-  --text-secondary: #5c6675;
+  --border-soft: #E5E7EB;
 
-  --accent: #1f3b5c;          /* azul corporativo */
-  --accent-soft: #2f5f8f;
+  --accent-primary: #1E3A8A;
+  --accent-cyan: #22D3EE;
+  --accent-success: #34D399;
 
-  --btn-bg: #e9edf2;
-  --btn-border: #d6dbe2;
+  --button-bg: #E5E7EB;
+  --button-bg-strong: #CBD5E1;
+}
 
-  --input-bg: #f8fafc;
-  --input-border: #d9dee6;
+/* Modo oscuro industrial */
 
-  --success: #1fa37a;
-  --warning: #d4a017;
-  --danger: #c23b3b;
+body.dark-mode {
+
+  --bg-main: #0F172A;
+  --bg-card: #1E293B;
+  --bg-input: #263143;
+
+  --text-primary: #F1F5F9;
+  --text-secondary: #94A3B8;
+
+  --border-soft: #334155;
+
+  --accent-primary: #3B82F6;
+  --accent-cyan: #22D3EE;
+  --accent-success: #34D399;
+
+  --button-bg: #334155;
+  --button-bg-strong: #475569;
 }
 
 /* =========================
-   DARK MODE
-========================= */
-
-body[data-theme="dark"] {
-
-  --bg: #0f1a22;
-  --card-bg: #16232d;
-  --card-border: #243745;
-
-  --text-primary: #e6edf3;
-  --text-secondary: #9fb3c4;
-
-  --accent: #00b3c9;        /* cian frío */
-  --accent-soft: #1fd1e0;
-
-  --btn-bg: #1c2b36;
-  --btn-border: #2e4657;
-
-  --input-bg: #1a2731;
-  --input-border: #304a5c;
-
-  --success: #3fd6a8;
-  --warning: #e3b341;
-  --danger: #ff6b6b;
-}
-
-/* =========================
-   GLOBAL
+   BASE
 ========================= */
 
 body {
   margin: 0;
-  font-family: var(--font-main);
-  background: var(--bg);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg-main);
   color: var(--text-primary);
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
-.layout {
-  max-width: 680px;
+.container {
+  max-width: 600px;
   margin: 0 auto;
   padding: 20px;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 10px;
-  max-width: 120px;
-}
-
-h1 {
+.header {
+  padding: 20px;
   text-align: center;
-  margin-bottom: 24px;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.8rem;
   font-weight: 600;
 }
 
-h2 {
-  font-size: 1rem;
-  margin-bottom: 12px;
-  color: var(--text-secondary);
-  font-weight: 600;
-}
-
-h3 {
-  margin-top: 20px;
-  font-size: 0.95rem;
-  color: var(--text-secondary);
+.toggle-theme {
+  margin-top: 10px;
+  font-size: 0.8rem;
 }
 
 /* =========================
    CARDS
 ========================= */
 
-.cardSection {
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  border-radius: 14px;
-  padding: 18px;
-  margin-bottom: 18px;
-  transition: background 0.2s ease, border 0.2s ease;
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-soft);
+  border-radius: 18px;
+  padding: 20px;
+  margin-bottom: 20px;
+  transition: background 0.3s ease, border 0.3s ease;
 }
 
-/* =========================
-   STOCK DESTACADO
-========================= */
-
-.stockPrincipal {
-  margin-top: 10px;
-  font-size: 1.2rem;
+.section-title {
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 1.1rem;
   font-weight: 600;
-  color: var(--accent);
-}
-
-.stockSecundario {
-  margin-top: 4px;
-  font-size: 0.9rem;
-  color: var(--text-secondary);
 }
 
 /* =========================
@@ -133,95 +102,94 @@ h3 {
 ========================= */
 
 label {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
   display: block;
-  margin-top: 14px;
-  margin-bottom: 4px;
-  font-size: 0.85rem;
-  color: var(--text-secondary);
+  margin-bottom: 6px;
 }
 
-input,
-select {
+input, select {
   width: 100%;
-  padding: 10px 12px;
-  border-radius: 10px;
-  border: 1px solid var(--input-border);
-  background: var(--input-bg);
-  color: var(--text-primary);
-  font-size: 0.95rem;
-  transition: border 0.2s ease;
-}
-
-input:focus,
-select:focus {
-  outline: none;
-  border-color: var(--accent);
-}
-
-/* =========================
-   RESULTADOS
-========================= */
-
-.resultado {
-  margin-top: 16px;
-  font-weight: 600;
-  font-size: 1rem;
-  color: var(--accent);
-}
-
-.equivalente {
-  font-size: 0.85rem;
-  margin-top: 4px;
-  color: var(--text-secondary);
-}
-
-.historial {
-  margin-top: 8px;
-  font-size: 0.85rem;
-  line-height: 1.5;
-}
-
-/* =========================
-   BUTTONS
-========================= */
-
-.btn,
-.btnSec {
-  width: 100%;
-  margin-top: 14px;
   padding: 12px;
-  border-radius: 12px;
-  font-size: 0.95rem;
-  font-weight: 500;
-  cursor: pointer;
-  border: 1px solid var(--btn-border);
-  background: var(--btn-bg);
+  border-radius: 14px;
+  border: 1px solid var(--border-soft);
+  background: var(--bg-input);
   color: var(--text-primary);
-  transition: background 0.15s ease, transform 0.05s ease;
+  margin-bottom: 15px;
+  font-size: 0.95rem;
 }
 
-.btn:hover,
-.btnSec:hover {
-  background: var(--accent);
-  color: white;
+/* =========================
+   STOCK
+========================= */
+
+.stock-box {
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
-.btn:active,
-.btnSec:active {
+.stock-label {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.stock-value {
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--accent-cyan);
+}
+
+.stock-board {
+  font-size: 0.9rem;
+  margin-bottom: 15px;
+}
+
+/* =========================
+   BOTONES
+========================= */
+
+button {
+  width: 100%;
+  padding: 14px;
+  border-radius: 14px;
+  border: 1px solid var(--border-soft);
+  background: var(--button-bg);
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  margin-bottom: 12px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.05s ease;
+}
+
+button:active {
   transform: scale(0.98);
 }
 
-.adminRow {
+button.primary {
+  background: var(--button-bg-strong);
+}
+
+.row-buttons {
   display: flex;
   gap: 10px;
 }
 
+.row-buttons button {
+  flex: 1;
+}
+
 /* =========================
-   ERROR
+   HISTORIAL
 ========================= */
 
-.error {
-  margin-top: 10px;
-  color: var(--danger);
+.historial p {
   font-size: 0.85rem;
+  margin: 6px 0;
+  color: var(--text-secondary);
+}
+
+.total-descargado {
+  font-weight: 600;
+  margin-bottom: 15px;
 }
