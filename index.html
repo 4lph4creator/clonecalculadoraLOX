@@ -3,84 +3,104 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#0F172A" />
+  <meta name="theme-color" content="#F2F4F7" />
   <title>Calculadora LOX</title>
-  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Usa tu archivo real -->
+  <link rel="stylesheet" href="stiletto.css" />
 </head>
+
 <body>
 
-  <header class="header">
-    <h1 class="title">Calculadora LOX</h1>
-    <button class="toggle-theme" onclick="toggleDarkMode()">Modo</button>
-  </header>
+<header class="header">
+  <h1 class="title">Calculadora LOX</h1>
+  <button class="toggle-theme" onclick="toggleDarkMode()">Modo</button>
+</header>
 
-  <main class="container">
+<main>
 
-    <section class="card">
-      <h2 class="section-title">Panel de operación</h2>
+  <!-- PANEL DE OPERACIÓN -->
+  <section class="card">
+    <h2 class="section-title">Panel de operación</h2>
 
-      <label>Isotanque</label>
-      <select>
-        <option>Isotanque 1</option>
-        <option>Isotanque 2</option>
-        <option>Isotanque 3</option>
-        <option>Isotanque 4</option>
-      </select>
+    <label>Isotanque</label>
+    <select id="isotanque">
+      <option>Isotanque 1</option>
+      <option>Isotanque 2</option>
+      <option>Isotanque 3</option>
+      <option>Isotanque 4</option>
+    </select>
 
-      <div class="stock-box">
-        <span class="stock-label">Stock isotanque seleccionado</span>
-        <span class="stock-value">0.00 m³</span>
-      </div>
+    <div class="stock-label">Stock isotanque seleccionado</div>
+    <div class="stock-value" id="stockSeleccionado">0.00 m³</div>
 
-      <div class="stock-board">
-        Stock a bordo: <strong>15305.00 m³</strong>
-      </div>
+    <div class="stock-board">
+      Stock a bordo: <strong id="stockTotal">15305.00 m³</strong>
+    </div>
 
-      <label>Centro</label>
-      <input type="text" placeholder="Ej: C. Contao" />
+    <label>Centro</label>
+    <input type="text" id="centro" placeholder="Ej: C. Contao" />
+  </section>
 
-    </section>
+  <!-- ZONA DE OPERACIÓN -->
+  <section class="card">
+    <h2 class="section-title">Zona de operación</h2>
 
-    <section class="card">
-      <h2 class="section-title">Zona de operación</h2>
+    <label>Nivel A (mmH₂O)</label>
+    <input type="number" id="nivelA" />
 
-      <label>Nivel A (mmH₂O)</label>
-      <input type="number" />
+    <label>Nivel B (mmH₂O)</label>
+    <input type="number" id="nivelB" />
 
-      <label>Nivel B (mmH₂O)</label>
-      <input type="number" />
+    <div class="total-descargado" id="totalDescargado">
+      Total descargado: —
+    </div>
 
-      <div class="total-descargado">
-        Total descargado: —
-      </div>
+    <button id="btnTramo">Registrar descarga por tramo</button>
+    <button id="btnCompleto">Descargar isotanque completo</button>
+  </section>
 
-      <button class="primary">Registrar descarga por tramo</button>
-      <button>Descargar isotanque completo</button>
-    </section>
+  <!-- CONTROL E HISTORIAL -->
+  <section class="card">
+    <h2 class="section-title">Control e historial</h2>
 
-    <section class="card">
-      <h2 class="section-title">Control e historial</h2>
+    <button id="btnCopiar">Copiar historial</button>
 
-      <button>Copiar historial</button>
+    <div class="row-buttons">
+      <button id="btnDeshacer">Deshacer</button>
+      <button id="btnNueva">Nueva campaña</button>
+    </div>
 
-      <div class="row-buttons">
-        <button>Deshacer</button>
-        <button>Nueva campaña</button>
-      </div>
+    <div class="historial" id="historial">
+      <!-- Tu JS llenará esto -->
+    </div>
+  </section>
 
-      <div class="historial">
-        <p>02-03-2026 — C. Voigue — Isotanque 4 — completa — 16186.00 m³</p>
-        <p>02-03-2026 — C. Aguantao — Isotanque 3 — completa — 16670.00 m³</p>
-      </div>
-    </section>
+</main>
 
-  </main>
+<script src="app.js"></script>
 
-  <script>
-    function toggleDarkMode() {
-      document.body.classList.toggle("dark-mode");
+<script>
+  function toggleDarkMode() {
+    document.body.classList.toggle("dark-mode");
+
+    const metaTheme = document.querySelector("meta[name=theme-color]");
+    if (document.body.classList.contains("dark-mode")) {
+      metaTheme.setAttribute("content", "#0F172A");
+      localStorage.setItem("theme", "dark");
+    } else {
+      metaTheme.setAttribute("content", "#F2F4F7");
+      localStorage.setItem("theme", "light");
     }
-  </script>
+  }
+
+  window.addEventListener("DOMContentLoaded", () => {
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark") {
+      document.body.classList.add("dark-mode");
+    }
+  });
+</script>
 
 </body>
 </html>
