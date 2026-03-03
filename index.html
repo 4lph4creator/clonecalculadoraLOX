@@ -1,98 +1,86 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Calculadora LO₂</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <link rel="stylesheet" href="stiletto.css">
-  <link rel="manifest" href="manifest.json">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0F172A" />
+  <title>Calculadora LOX</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
-
 <body>
 
-  <main class="layout">
-    <img src="img/logo_transparent.png" class="logo" alt="Logo LOX">
-    <h1>Calculadora LOX</h1>
+  <header class="header">
+    <h1 class="title">Calculadora LOX</h1>
+    <button class="toggle-theme" onclick="toggleDarkMode()">Modo</button>
+  </header>
 
-    <!-- 1) OPERATION PANEL -->
-    <section class="panel cardSection panelOperacion">
-      <h2>Panel de operación</h2>
+  <main class="container">
 
-      <label for="isotanqueSelect">Isotanque</label>
-      <select id="isotanqueSelect">
-        <option value="1">Isotanque 1</option>
-        <option value="2">Isotanque 2</option>
-        <option value="3">Isotanque 3</option>
-        <option value="4">Isotanque 4</option>
+    <section class="card">
+      <h2 class="section-title">Panel de operación</h2>
+
+      <label>Isotanque</label>
+      <select>
+        <option>Isotanque 1</option>
+        <option>Isotanque 2</option>
+        <option>Isotanque 3</option>
+        <option>Isotanque 4</option>
       </select>
 
-      <div id="stockIsotanque" class="stockPrincipal">Stock isotanque seleccionado: —</div>
-      <div id="saldoRestante" class="stockSecundario">Stock a bordo: —</div>
-
-      <label for="centro">Centro</label>
-      <input id="centro" type="text" placeholder="Ej: C. Contao">
-    </section>
-
-    <!-- 2) OPERATION ZONE -->
-    <section class="panel cardSection zonaOperacion">
-      <h2>Zona de operación</h2>
-
-      <label for="nivelA">Nivel A (mmH₂O)</label>
-      <input id="nivelA" type="number">
-      <div id="m3A" class="equivalente">—</div>
-
-      <label for="nivelB">Nivel B (mmH₂O)</label>
-      <input id="nivelB" type="number">
-      <div id="m3B" class="equivalente">—</div>
-
-      <div id="resultado" class="resultado">Total descargado: —</div>
-
-      <button id="registrar" class="btn">Registrar descarga por tramo</button>
-      <button id="descargaCompleta" class="btn">Descargar isotanque completo</button>
-    </section>
-
-    <!-- 3) CAMPAIGN CONFIGURATION -->
-    <details class="panel cardSection panelConfig">
-      <summary>Configurar campaña</summary>
-
-      <div class="configBody">
-        <label for="saldoIso1">Carga inicial Isotanque 1 (m³)</label>
-        <input id="saldoIso1" type="number">
-
-        <label for="saldoIso2">Carga inicial Isotanque 2 (m³)</label>
-        <input id="saldoIso2" type="number">
-
-        <label for="saldoIso3">Carga inicial Isotanque 3 (m³)</label>
-        <input id="saldoIso3" type="number">
-
-        <label for="saldoIso4">Carga inicial Isotanque 4 (m³)</label>
-        <input id="saldoIso4" type="number">
-
-        <label for="cargaTotalInicial">Carga total inicial (m³)</label>
-        <input id="cargaTotalInicial" type="number" readonly>
-      </div>
-    </details>
-
-    <!-- 4) CONTROL & HISTORY -->
-    <section class="panel cardSection panelControl">
-      <h2>Control e historial</h2>
-
-      <button id="exportar" class="btn">Copiar historial</button>
-
-      <div class="adminRow">
-        <button id="rollback" class="btnSec">Deshacer</button>
-        <button id="nuevaCampana" class="btnSec">Nueva campaña</button>
+      <div class="stock-box">
+        <span class="stock-label">Stock isotanque seleccionado</span>
+        <span class="stock-value">0.00 m³</span>
       </div>
 
-      <h3>Historial descargas</h3>
-      <div id="historial" class="equivalente historial"></div>
+      <div class="stock-board">
+        Stock a bordo: <strong>15305.00 m³</strong>
+      </div>
+
+      <label>Centro</label>
+      <input type="text" placeholder="Ej: C. Contao" />
+
     </section>
 
-    <div id="mensaje" class="error"></div>
+    <section class="card">
+      <h2 class="section-title">Zona de operación</h2>
+
+      <label>Nivel A (mmH₂O)</label>
+      <input type="number" />
+
+      <label>Nivel B (mmH₂O)</label>
+      <input type="number" />
+
+      <div class="total-descargado">
+        Total descargado: —
+      </div>
+
+      <button class="primary">Registrar descarga por tramo</button>
+      <button>Descargar isotanque completo</button>
+    </section>
+
+    <section class="card">
+      <h2 class="section-title">Control e historial</h2>
+
+      <button>Copiar historial</button>
+
+      <div class="row-buttons">
+        <button>Deshacer</button>
+        <button>Nueva campaña</button>
+      </div>
+
+      <div class="historial">
+        <p>02-03-2026 — C. Voigue — Isotanque 4 — completa — 16186.00 m³</p>
+        <p>02-03-2026 — C. Aguantao — Isotanque 3 — completa — 16670.00 m³</p>
+      </div>
+    </section>
+
   </main>
 
-  <script src="app.js"></script>
+  <script>
+    function toggleDarkMode() {
+      document.body.classList.toggle("dark-mode");
+    }
+  </script>
 
 </body>
 </html>
