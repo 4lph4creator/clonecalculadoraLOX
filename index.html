@@ -22,17 +22,21 @@
       <strong id="saldoRestante">0.00 m³</strong>
     </div>
 
+    <!-- Selector visual -->
     <div class="isoSelector" id="isoSelector">
-      <div id="isoTitulo" class="isoTitle">Isotanque 1</div>
-      <div class="arrow">›</div>
-    </div>
+      <div class="isoTitleWrapper">
+        <div id="isoTitulo" class="isoTitle">Isotanque 1</div>
+        <div class="arrow">›</div>
+      </div>
 
-    <select id="isotanqueSelect" style="display:none;">
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-    </select>
+      <!-- PANEL FLOTANTE -->
+      <div class="isoDropdown" id="isoDropdown">
+        <button class="isoOption active" data-iso="1">1</button>
+        <button class="isoOption" data-iso="2">2</button>
+        <button class="isoOption" data-iso="3">3</button>
+        <button class="isoOption" data-iso="4">4</button>
+      </div>
+    </div>
 
     <div class="isoValueBox">
       <div id="stockIsotanque" class="isoValue">
