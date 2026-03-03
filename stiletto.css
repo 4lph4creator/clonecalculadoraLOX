@@ -4,15 +4,15 @@
   --bg-bottom: #DDE3EC;
 
   --bg-card: #FFFFFF;
-  --bg-soft: #F6F8FB;
+  --bg-soft: #F9FAFC;
 
   --text-primary: #1C2430;
   --text-secondary: #8A94A6;
 
-  --accent: #1E40AF;
+  --accent: #2B5FC7;
 
   --shadow-main: 0 24px 60px rgba(15, 23, 42, 0.08);
-  --shadow-soft: 0 10px 25px rgba(15, 23, 42, 0.05);
+  --shadow-soft: 0 8px 20px rgba(15, 23, 42, 0.04);
 }
 
 * {
@@ -47,18 +47,18 @@ body {
 .cardMain {
   background: var(--bg-card);
   border-radius: 26px;
-  padding: 28px 26px 30px 26px;
+  padding: 26px 24px 28px 24px;
   margin-bottom: 34px;
   box-shadow: var(--shadow-main);
 }
 
-/* STOCK A BORDO (ajustado como mock) */
+/* STOCK A BORDO */
 
 .stockRow {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
   font-size: 0.85rem;
   color: var(--text-secondary);
 }
@@ -80,7 +80,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 14px;
   cursor: pointer;
 }
 
@@ -99,8 +99,8 @@ body {
 
 .isoValueBox {
   background: var(--bg-soft);
-  border-radius: 22px;
-  padding: 26px 28px;
+  border-radius: 20px;
+  padding: 22px 24px;
   box-shadow: var(--shadow-soft);
 }
 
@@ -124,7 +124,7 @@ body {
 .card {
   background: var(--bg-card);
   border-radius: 22px;
-  padding: 24px;
+  padding: 22px;
   margin-bottom: 28px;
   box-shadow: var(--shadow-soft);
 }
@@ -158,7 +158,7 @@ input {
 input:focus {
   outline: none;
   background: #FFFFFF;
-  box-shadow: 0 0 0 2px rgba(30,64,175,0.12);
+  box-shadow: 0 0 0 2px rgba(43,95,199,0.12);
 }
 
 /* RESULTADO */
