@@ -14,7 +14,6 @@
 
   <img src="img/logo_transparent.png" class="logo" alt="Frasal">
 
-  <!-- BLOQUE SUPERIOR -->
   <section class="cardMain">
 
     <div class="stockRow">
@@ -22,21 +21,19 @@
       <strong id="saldoRestante">0.00 m³</strong>
     </div>
 
-    <!-- Selector visual -->
-    <div class="isoSelector" id="isoSelector">
-      <div class="isoTitleWrapper">
-        <div id="isoTitulo" class="isoTitle">Isotanque 1</div>
-        <div class="arrow">›</div>
-      </div>
+    <!-- Selector visual limpio -->
+    <label for="isotanqueSelect" class="isoSelector">
+      <span id="isoTitulo" class="isoTitle">Isotanque 1</span>
+      <span class="arrow">›</span>
+    </label>
 
-      <!-- PANEL FLOTANTE -->
-      <div class="isoDropdown" id="isoDropdown">
-        <button class="isoOption active" data-iso="1">1</button>
-        <button class="isoOption" data-iso="2">2</button>
-        <button class="isoOption" data-iso="3">3</button>
-        <button class="isoOption" data-iso="4">4</button>
-      </div>
-    </div>
+    <!-- Select real -->
+    <select id="isotanqueSelect" class="isoNative">
+      <option value="1">Isotanque 1</option>
+      <option value="2">Isotanque 2</option>
+      <option value="3">Isotanque 3</option>
+      <option value="4">Isotanque 4</option>
+    </select>
 
     <div class="isoValueBox">
       <div id="stockIsotanque" class="isoValue">
@@ -49,7 +46,6 @@
 
   </section>
 
-  <!-- ZONA DE OPERACIÓN -->
   <section class="card">
 
     <h2>Zona de operación</h2>
@@ -79,7 +75,6 @@
 
   </section>
 
-  <!-- CONFIG CAMPAÑA -->
   <details class="card">
     <summary>Configurar campaña</summary>
 
@@ -99,7 +94,6 @@
     <input id="cargaTotalInicial" type="number" readonly>
   </details>
 
-  <!-- CONTROL -->
   <section class="card">
     <h2>Control e historial</h2>
 
