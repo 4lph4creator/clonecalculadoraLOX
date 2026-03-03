@@ -1,313 +1,210 @@
-body{
-    margin:0;
-    font-family: Arial, Helvetica, sans-serif;
-    background: url("img/bg.png") no-repeat center center fixed;
-    background-size: cover;
-    display:flex;
-    justify-content:center;
-    align-items:flex-start;
-    padding:16px 0;
-    min-height:100vh;
+/* =========================
+   VARIABLES
+========================= */
+
+:root {
+  --bg-main: #F2F4F7;
+  --bg-card: #FFFFFF;
+  --bg-input: #F8FAFC;
+
+  --text-primary: #1C2430;
+  --text-secondary: #6B7280;
+
+  --border-soft: #E5E7EB;
+
+  --accent-primary: #1E3A8A;
+  --accent-highlight: #2563EB;
+
+  --btn-bg: #E5E7EB;
+  --btn-hover: #D1D5DB;
 }
 
-.layout{
-    width:380px;
-    max-width:94vw;
-    display:flex;
-    flex-direction:column;
-    gap:12px;
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-main: #0F172A;
+    --bg-card: #1E293B;
+    --bg-input: #263143;
+
+    --text-primary: #F1F5F9;
+    --text-secondary: #94A3B8;
+
+    --border-soft: #334155;
+
+    --accent-primary: #3B82F6;
+    --accent-highlight: #3B82F6;
+
+    --btn-bg: #334155;
+    --btn-hover: #475569;
+  }
 }
 
-.logo{
-    width:130px;
-    margin:0 auto;
+/* =========================
+   BASE
+========================= */
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg-main);
+  color: var(--text-primary);
 }
 
-h1{
-    margin:0 0 2px 0;
-    text-align:center;
+.layout {
+  max-width: 640px;
+  margin: 30px auto;
+  padding: 0 20px;
 }
 
-h2{
-    margin:0 0 10px 0;
-    font-size:16px;
-    color:#1e293b;
+.logo {
+  width: 120px;
+  display: block;
+  margin: 20px auto 10px auto;
 }
 
-h3{
-    margin:16px 0 8px 0;
-    text-align:left;
+h1 {
+  text-align: center;
+  font-weight: 600;
+  margin-bottom: 30px;
 }
 
-.cardSection{
-    background: rgba(255,255,255,0.93);
-    padding:14px;
-    border-radius:14px;
-    box-shadow:0 8px 24px rgba(0,0,0,0.16);
+/* =========================
+   PANELS
+========================= */
+
+.panel {
+  margin-bottom: 24px;
 }
 
-.zonaOperacion{
-    padding:16px;
-    box-shadow:0 10px 28px rgba(27,117,187,0.26);
+.cardSection {
+  background: var(--bg-card);
+  border-radius: 20px;
+  padding: 24px;
+  border: 1px solid var(--border-soft);
 }
 
-label{
-    display:block;
-    text-align:left;
-    margin-top:11px;
-    font-weight:bold;
-    font-size:14px;
+h2 {
+  margin-top: 0;
+  font-weight: 600;
+}
+
+/* =========================
+   INPUTS
+========================= */
+
+label {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
 }
 
 input,
-select{
-    width:100%;
-    padding:10px;
-    border-radius:8px;
-    border:1px solid #cbd5e1;
-    margin-top:5px;
-    font-size:16px;
-    box-sizing:border-box;
-    background:white;
+select {
+  width: 100%;
+  padding: 12px;
+  border-radius: 14px;
+  border: 1px solid var(--border-soft);
+  background: var(--bg-input);
+  color: var(--text-primary);
+  margin-bottom: 16px;
+  font-size: 0.95rem;
+  box-sizing: border-box;
 }
 
-input:disabled,
-input[readonly]{
-    background:#f3f4f6;
-    color:#6b7280;
-    border:1px solid #d1d5db;
-    font-weight:bold;
+/* =========================
+   STOCK VISUAL
+========================= */
+
+.stockPrincipal {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--accent-highlight);
+  margin: 10px 0;
 }
 
-.equivalente{
-    font-size:13px;
-    color:#555;
-    text-align:left;
-    margin-top:4px;
+.stockSecundario {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 15px;
 }
 
-/* DIGITAL DISPLAY */
-.stockDisplay{
-    margin-top:10px;
-    background:#0b1220;
-    border:1px solid #1e293b;
-    border-radius:12px;
-    padding:10px;
+/* =========================
+   RESULTADOS
+========================= */
+
+.equivalente {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
 }
 
-.stockDisplayLabel{
-    color:#94a3b8;
-    font-size:11px;
-    text-transform:uppercase;
-    letter-spacing:0.8px;
-    margin-bottom:6px;
+.resultado {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 15px 0;
 }
 
-.stockDisplayValueRow{
-    display:flex;
-    align-items:flex-end;
-    justify-content:space-between;
-    gap:8px;
+/* =========================
+   BOTONES
+========================= */
+
+.btn {
+  width: 100%;
+  padding: 14px;
+  border-radius: 14px;
+  border: 1px solid var(--border-soft);
+  background: var(--btn-bg);
+  color: var(--text-primary);
+  margin-bottom: 12px;
+  cursor: pointer;
+  transition: 0.2s ease;
 }
 
-.stockPrincipal{
-    color:#e2e8f0;
-    font-family:"Courier New", monospace;
-    font-size:22px;
-    font-weight:700;
-    line-height:1.1;
-    margin:0;
-    flex:1;
-    word-break:break-word;
+.btn:hover {
+  background: var(--btn-hover);
 }
 
-.stockDisplayUnit{
-    color:#94a3b8;
-    font-size:12px;
-    line-height:1.2;
-    padding-bottom:2px;
+.btnSec {
+  flex: 1;
+  padding: 14px;
+  border-radius: 14px;
+  border: 1px solid var(--border-soft);
+  background: var(--btn-bg);
+  color: var(--text-primary);
+  cursor: pointer;
 }
 
-.stockSecundario{
-    margin-top:6px;
-    font-size:12px;
-    color:#334155;
-    text-align:center;
+.adminRow {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
 }
 
-/* MEASUREMENT MODULES */
-.measurementModule{
-    margin-top:8px;
-    background:#f8fafc;
-    border:1px solid #dbe5ef;
-    border-radius:12px;
-    padding:8px;
+/* =========================
+   DETAILS (Config campaña)
+========================= */
+
+details summary {
+  cursor: pointer;
+  font-weight: 600;
+  margin-bottom: 15px;
 }
 
-.measurementLabel{
-    margin-top:0;
-    font-size:12px;
-    text-transform:uppercase;
-    letter-spacing:0.5px;
-    color:#334155;
+.configBody {
+  margin-top: 15px;
 }
 
-.measurementInput{
-    height:60px;
-    font-size:30px;
-    font-weight:700;
-    text-align:center;
-    border:1px solid #94a3b8;
-    border-radius:10px;
-    padding:8px 10px;
+/* =========================
+   HISTORIAL
+========================= */
+
+.historial {
+  font-size: 0.85rem;
+  line-height: 1.4;
 }
 
-.measurementInput::placeholder{
-    color:#94a3b8;
-    font-size:24px;
-}
-
-.measurementInput:focus{
-    outline:none;
-    border-color:#1b75bb;
-    box-shadow:0 0 0 3px rgba(27,117,187,0.2);
-}
-
-.stockPrincipal{
-    margin-top:10px;
-    padding:12px;
-    border-radius:12px;
-    background:#0f172a;
-    color:#f8fafc;
-    font-size:20px;
-    font-weight:700;
-    text-align:center;
-}
-
-.stockSecundario{
-    margin-top:6px;
-    font-size:13px;
-    color:#334155;
-    text-align:center;
-}
-
-button{
-    margin-top:12px;
-    width:100%;
-    padding:12px;
-    border-radius:8px;
-    font-size:16px;
-    cursor:pointer;
-    transition:0.15s ease;
-}
-
-/* BUTTON HIERARCHY */
-.btnPrimary{
-    border:none;
-    background:#1b75bb;
-    color:white;
-    font-weight:700;
-}
-
-#nuevaCampana{
-    background:#64748b;
-}
-
-.btnSecondary{
-    border:1px solid #1b75bb;
-    background:#eaf4fb;
-    color:#155f96;
-    font-weight:700;
-}
-
-.resultado{
-    margin-top:14px;
-    padding:10px;
-    background:rgba(255,255,255,0.75);
-    border-radius:10px;
-    font-size:16px;
-    text-align:center;
-    color:#0f172a;
-    border:1px solid rgba(148,163,184,0.4);
-}
-
-.panelConfig summary{
-    cursor:pointer;
-    list-style:none;
-    font-weight:700;
-    color:#0f172a;
-}
-
-.panelConfig summary::-webkit-details-marker{
-    display:none;
-}
-
-.panelConfig summary::after{
-    content:"▾";
-    float:right;
-}
-
-.panelConfig[open] summary::after{
-    content:"▴";
-}
-
-.configBody{
-    margin-top:8px;
-}
-
-.adminRow{
-    display:flex;
-    gap:10px;
-    margin-top:8px;
-}
-
-.adminRow button{
-    width:auto;
-    flex:1;
-}
-
-.btnSec{
-    padding:10px;
-    background:#9ca3af;
-    color:white;
-    font-size:14px;
-}
-
-.panelConfig summary::after{
-    content:"▾";
-    float:right;
-}
-
-.panelConfig[open] summary::after{
-    content:"▴";
-}
-
-.configBody{
-    margin-top:8px;
-}
-
-.historial{
-    max-height:160px;
-    overflow:auto;
-    padding-right:4px;
-}
-
-.error{
-    min-height:18px;
-    color:#b91c1c;
-    font-size:13px;
-    text-align:center;
-}
-
-.historial{
-    max-height:160px;
-    overflow:auto;
-    padding-right:4px;
-}
-
-.error{
-    min-height:18px;
-    color:#b91c1c;
-    font-size:13px;
-    text-align:center;
+.error {
+  text-align: center;
+  color: red;
+  margin-top: 20px;
 }
