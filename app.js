@@ -65,24 +65,24 @@ function interpolar(mm){
 }
 
 // =====================
-// ACTUALIZAR UI STOCK
+// ACTUALIZAR UI
 // =====================
 function actualizarStockUI(){
 
   const idx = isotanqueActualIndex();
   const stockActual = stockPorIsotanque[idx] || 0;
 
-  // Valor grande del isotanque
+  // Valor grande
   document.getElementById("stockIsotanque").textContent =
-    stockActual.toFixed(2) + " m³";
+    stockActual.toLocaleString("es-CL", {minimumFractionDigits:2}) + " m³";
 
   // Stock total arriba
   document.getElementById("saldoRestante").textContent =
-    "Stock a bordo: " + totalBordo().toLocaleString("es-CL", {minimumFractionDigits:2}) + " m³";
+    totalBordo().toLocaleString("es-CL", {minimumFractionDigits:2}) + " m³";
 }
 
 // =====================
-// ACTUALIZAR CÁLCULO
+// CÁLCULO DESCARGA
 // =====================
 function actualizar(){
 
@@ -92,11 +92,11 @@ function actualizar(){
   const A = interpolar(nivelA);
   const B = interpolar(nivelB);
 
-  const m3A = document.getElementById("m3A");
-  const m3B = document.getElementById("m3B");
+  document.getElementById("m3A").textContent =
+    A !== null ? A.toFixed(2) + " m³" : "—";
 
-  m3A.textContent = A !== null ? A.toFixed(2) + " m³" : "—";
-  m3B.textContent = B !== null ? B.toFixed(2) + " m³" : "—";
+  document.getElementById("m3B").textContent =
+    B !== null ? B.toFixed(2) + " m³" : "—";
 
   if(A !== null && B !== null){
     ultimoTotal = Math.abs(A - B);
@@ -216,25 +216,20 @@ function recalcularTotalInicial(){
 }
 
 // =====================
-// TABS ISOTANQUE
+// SELECTOR DISCRETO ISOTANQUE
 // =====================
-document.querySelectorAll(".isoTab").forEach(btn => {
+document.getElementById("isoSelector")
+  .addEventListener("click", function(){
 
-  btn.addEventListener("click", function(){
+    let actual = Number(document.getElementById("isotanqueSelect").value);
+    actual++;
+    if(actual > 4) actual = 1;
 
-    document.querySelectorAll(".isoTab")
-      .forEach(b => b.classList.remove("active"));
-
-    this.classList.add("active");
-
-    const iso = this.getAttribute("data-iso");
-
-    document.getElementById("isotanqueSelect").value = iso;
-    document.getElementById("isoTitulo").textContent = "Isotanque " + iso;
+    document.getElementById("isotanqueSelect").value = actual;
+    document.getElementById("isoTitulo").textContent =
+      "Isotanque " + actual;
 
     actualizarStockUI();
-  });
-
 });
 
 // =====================
