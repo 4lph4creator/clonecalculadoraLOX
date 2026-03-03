@@ -29,9 +29,7 @@ let historial =
 // =====================
 function parseNumero(valor){
   if(!valor) return 0;
-  valor = valor.trim();
-  valor = valor.replace(",", ".");
-  valor = valor.replace(/[^0-9.]/g, "");
+  valor = valor.trim().replace(",", ".").replace(/[^0-9.]/g, "");
   return parseFloat(valor) || 0;
 }
 
@@ -135,7 +133,7 @@ function rollback(){
 }
 
 // =====================
-// TOTAL INICIAL AUTOMÁTICO
+// TOTAL INICIAL
 // =====================
 function recalcularTotalInicial(){
   const cargas = [
@@ -170,12 +168,11 @@ function interpolar(mm){
       return a.m3 + r*(b.m3-a.m3);
     }
   }
-
   return null;
 }
 
 // =====================
-// CALCULO DESCARGA
+// CALCULO
 // =====================
 function actualizar(){
   const A=interpolar(document.getElementById("nivelA").value);
@@ -193,7 +190,7 @@ function actualizar(){
 }
 
 // =====================
-// REGISTRAR DESCARGA
+// REGISTRAR
 // =====================
 function registrarDescarga(volumen,tipo){
   if(volumen<=0) return;
@@ -234,7 +231,6 @@ function descargarIsotanqueCompleto(){
   const stockActual=stockPorIsotanque[idx]||0;
 
   if(stockActual<=0) return alert("Sin stock.");
-
   registrarDescarga(stockActual,"completa");
 }
 
@@ -261,24 +257,37 @@ function nuevaCampana(){
 }
 
 // =====================
-// MODO OSCURO (NUEVO)
+// TEMA AUTOMÁTICO
 // =====================
-function aplicarTemaGuardado(){
-  const tema = localStorage.getItem("temaVisual");
+function detectarPreferenciaSistema(){
+  return window.matchMedia &&
+         window.matchMedia("(prefers-color-scheme: dark)").matches;
+}
+
+function aplicarTema(tema){
   if(tema === "dark"){
     document.body.setAttribute("data-theme","dark");
+  } else {
+    document.body.removeAttribute("data-theme");
+  }
+}
+
+function inicializarTema(){
+  const guardado = localStorage.getItem("temaVisual");
+
+  if(guardado){
+    aplicarTema(guardado);
+  } else {
+    aplicarTema(detectarPreferenciaSistema() ? "dark" : "light");
   }
 }
 
 function alternarTema(){
-  const actual = document.body.getAttribute("data-theme");
-  if(actual === "dark"){
-    document.body.removeAttribute("data-theme");
-    localStorage.setItem("temaVisual","light");
-  } else {
-    document.body.setAttribute("data-theme","dark");
-    localStorage.setItem("temaVisual","dark");
-  }
+  const actual = document.body.getAttribute("data-theme") === "dark" ? "dark" : "light";
+  const nuevo = actual === "dark" ? "light" : "dark";
+
+  aplicarTema(nuevo);
+  localStorage.setItem("temaVisual", nuevo);
 }
 
 // =====================
@@ -293,7 +302,7 @@ window.addEventListener("load",()=>{
   actualizarStockUI();
   actualizarCargaTotalInicialUI(totalBordo());
   renderHistorial();
-  aplicarTemaGuardado();
+  inicializarTema();
 });
 
 // =====================
