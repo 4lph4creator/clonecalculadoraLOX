@@ -21,19 +21,19 @@
       <strong id="saldoRestante">0.00 m³</strong>
     </div>
 
-    <!-- Selector visual limpio -->
-    <label for="isotanqueSelect" class="isoSelector">
+    <!-- Selector elegante -->
+    <div class="isoSelector">
       <span id="isoTitulo" class="isoTitle">Isotanque 1</span>
       <span class="arrow">›</span>
-    </label>
 
-    <!-- Select real -->
-    <select id="isotanqueSelect" class="isoNative">
-      <option value="1">Isotanque 1</option>
-      <option value="2">Isotanque 2</option>
-      <option value="3">Isotanque 3</option>
-      <option value="4">Isotanque 4</option>
-    </select>
+      <!-- Select REAL superpuesto -->
+      <select id="isotanqueSelect" class="isoOverlaySelect">
+        <option value="1">Isotanque 1</option>
+        <option value="2">Isotanque 2</option>
+        <option value="3">Isotanque 3</option>
+        <option value="4">Isotanque 4</option>
+      </select>
+    </div>
 
     <div class="isoValueBox">
       <div id="stockIsotanque" class="isoValue">
@@ -47,7 +47,6 @@
   </section>
 
   <section class="card">
-
     <h2>Zona de operación</h2>
 
     <label for="centro">Centro</label>
@@ -72,39 +71,6 @@
     <button id="descargaCompleta" class="btn">
       Descargar isotanque completo
     </button>
-
-  </section>
-
-  <details class="card">
-    <summary>Configurar campaña</summary>
-
-    <label for="saldoIso1">Carga inicial Isotanque 1 (m³)</label>
-    <input id="saldoIso1" type="number">
-
-    <label for="saldoIso2">Carga inicial Isotanque 2 (m³)</label>
-    <input id="saldoIso2" type="number">
-
-    <label for="saldoIso3">Carga inicial Isotanque 3 (m³)</label>
-    <input id="saldoIso3" type="number">
-
-    <label for="saldoIso4">Carga inicial Isotanque 4 (m³)</label>
-    <input id="saldoIso4" type="number">
-
-    <label for="cargaTotalInicial">Carga total inicial (m³)</label>
-    <input id="cargaTotalInicial" type="number" readonly>
-  </details>
-
-  <section class="card">
-    <h2>Control e historial</h2>
-
-    <button id="exportar" class="btn">Copiar historial</button>
-
-    <div class="adminRow">
-      <button id="rollback" class="btnSec">Deshacer</button>
-      <button id="nuevaCampana" class="btnSec">Nueva campaña</button>
-    </div>
-
-    <div id="historial" class="historial"></div>
   </section>
 
 </main>
