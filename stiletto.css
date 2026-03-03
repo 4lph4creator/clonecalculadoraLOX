@@ -4,10 +4,10 @@
 
 :root {
 
-  /* Modo claro */
+  /* MODO CLARO */
   --bg-main: #F2F4F7;
   --bg-card: #FFFFFF;
-  --bg-input: #F7F9FB;
+  --bg-input: #F8FAFC;
 
   --text-primary: #1C2430;
   --text-secondary: #6B7280;
@@ -16,13 +16,12 @@
 
   --accent-primary: #1E3A8A;
   --accent-cyan: #22D3EE;
-  --accent-success: #34D399;
 
   --button-bg: #E5E7EB;
-  --button-bg-strong: #CBD5E1;
+  --button-hover: #D1D5DB;
 }
 
-/* Modo oscuro industrial */
+/* MODO OSCURO INDUSTRIAL */
 
 body.dark-mode {
 
@@ -37,10 +36,9 @@ body.dark-mode {
 
   --accent-primary: #3B82F6;
   --accent-cyan: #22D3EE;
-  --accent-success: #34D399;
 
   --button-bg: #334155;
-  --button-bg-strong: #475569;
+  --button-hover: #475569;
 }
 
 /* =========================
@@ -55,26 +53,24 @@ body {
   transition: background 0.3s ease, color 0.3s ease;
 }
 
-.container {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
+main {
+  max-width: 640px;
+  margin: 40px auto;
+  padding: 0 20px;
 }
 
 .header {
-  padding: 20px;
-  text-align: center;
+  padding: 20px 20px 0 20px;
 }
 
 .title {
-  margin: 0;
   font-size: 1.8rem;
   font-weight: 600;
+  margin: 0;
 }
 
 .toggle-theme {
   margin-top: 10px;
-  font-size: 0.8rem;
 }
 
 /* =========================
@@ -83,16 +79,15 @@ body {
 
 .card {
   background: var(--bg-card);
-  border: 1px solid var(--border-soft);
   border-radius: 18px;
-  padding: 20px;
-  margin-bottom: 20px;
+  padding: 24px;
+  margin-bottom: 24px;
+  border: 1px solid var(--border-soft);
   transition: background 0.3s ease, border 0.3s ease;
 }
 
 .section-title {
   margin-top: 0;
-  margin-bottom: 15px;
   font-size: 1.1rem;
   font-weight: 600;
 }
@@ -102,9 +97,9 @@ body {
 ========================= */
 
 label {
-  font-size: 0.9rem;
-  color: var(--text-secondary);
   display: block;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
   margin-bottom: 6px;
 }
 
@@ -115,7 +110,7 @@ input, select {
   border: 1px solid var(--border-soft);
   background: var(--bg-input);
   color: var(--text-primary);
-  margin-bottom: 15px;
+  margin-bottom: 16px;
   font-size: 0.95rem;
 }
 
@@ -123,21 +118,16 @@ input, select {
    STOCK
 ========================= */
 
-.stock-box {
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
 .stock-label {
-  display: block;
   font-size: 0.8rem;
   color: var(--text-secondary);
 }
 
 .stock-value {
-  font-size: 2rem;
+  font-size: 2.2rem;
   font-weight: 600;
-  color: var(--accent-cyan);
+  color: var(--accent-primary);
+  margin: 5px 0 10px 0;
 }
 
 .stock-board {
@@ -162,17 +152,17 @@ button {
   transition: background 0.2s ease, transform 0.05s ease;
 }
 
+button:hover {
+  background: var(--button-hover);
+}
+
 button:active {
   transform: scale(0.98);
 }
 
-button.primary {
-  background: var(--button-bg-strong);
-}
-
 .row-buttons {
   display: flex;
-  gap: 10px;
+  gap: 12px;
 }
 
 .row-buttons button {
