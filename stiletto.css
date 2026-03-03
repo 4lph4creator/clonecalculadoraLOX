@@ -9,7 +9,9 @@
   --text-primary: #1C2430;
   --text-secondary: #8A94A6;
 
-  --accent: #274B9F;
+  --accent-normal: #274B9F;
+  --accent-warning: #C48A1B;
+  --accent-critical: #B23A3A;
 
   --shadow-main: 0 22px 55px rgba(15, 23, 42, 0.07);
   --shadow-soft: 0 6px 16px rgba(15, 23, 42, 0.035);
@@ -32,17 +34,11 @@ body {
   padding: 0 20px;
 }
 
-/* LOGO */
-
 .logo {
   width: 135px;
   display: block;
   margin: 0 auto 26px auto;
 }
-
-/* =============================
-   TARJETA PRINCIPAL
-============================= */
 
 .cardMain {
   background: var(--bg-card);
@@ -51,8 +47,6 @@ body {
   margin-bottom: 32px;
   box-shadow: var(--shadow-main);
 }
-
-/* STOCK A BORDO */
 
 .stockRow {
   display: flex;
@@ -69,13 +63,6 @@ body {
   font-size: 0.9rem;
 }
 
-.stockRow strong span {
-  font-size: 0.75rem;
-  color: var(--text-secondary);
-}
-
-/* ISOTANQUE */
-
 .isoSelector {
   display: flex;
   justify-content: space-between;
@@ -87,15 +74,12 @@ body {
 .isoTitle {
   font-size: 1.7rem;
   font-weight: 600;
-  letter-spacing: -0.3px;
 }
 
 .arrow {
   font-size: 1.3rem;
   color: var(--text-secondary);
 }
-
-/* BLOQUE VALOR */
 
 .isoValueBox {
   background: var(--bg-soft);
@@ -107,19 +91,29 @@ body {
 .isoValue {
   font-size: clamp(2.3rem, 5.5vw, 2.9rem);
   font-weight: 600;
-  color: var(--accent);
   white-space: nowrap;
   margin-bottom: 4px;
+  transition: color 0.3s ease;
+}
+
+/* Estados dinámicos */
+
+.iso-normal {
+  color: var(--accent-normal);
+}
+
+.iso-warning {
+  color: var(--accent-warning);
+}
+
+.iso-critical {
+  color: var(--accent-critical);
 }
 
 .isoSub {
   font-size: 0.8rem;
   color: var(--text-secondary);
 }
-
-/* =============================
-   TARJETAS GENERALES
-============================= */
 
 .card {
   background: var(--bg-card);
@@ -134,8 +128,6 @@ h2 {
   font-size: 1.25rem;
   font-weight: 600;
 }
-
-/* FORMULARIOS */
 
 label {
   display: block;
@@ -152,7 +144,6 @@ input {
   background: #F1F4F9;
   margin-bottom: 14px;
   font-size: 0.92rem;
-  transition: all 0.2s ease;
 }
 
 input:focus {
@@ -161,15 +152,11 @@ input:focus {
   box-shadow: 0 0 0 2px rgba(39,75,159,0.12);
 }
 
-/* RESULTADO */
-
 .resultado {
   font-size: 1.15rem;
   font-weight: 600;
   margin: 16px 0;
 }
-
-/* BOTONES */
 
 .btn {
   width: 100%;
@@ -180,15 +167,10 @@ input:focus {
   cursor: pointer;
   margin-bottom: 10px;
   font-size: 0.92rem;
-  transition: all 0.15s ease;
 }
 
 .btn:hover {
   background: #DDE3EC;
-}
-
-.btn:active {
-  transform: scale(0.985);
 }
 
 .adminRow {
