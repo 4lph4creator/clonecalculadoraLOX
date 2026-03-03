@@ -74,14 +74,12 @@ function actualizarCargaTotalInicialUI(valor){
 // HISTORIAL
 // =====================
 function renderHistorial(){
-
   const cont = document.getElementById("historial");
   if(!cont) return;
 
   cont.innerHTML = "";
 
   [...historial].reverse().forEach(r=>{
-
     const div = document.createElement("div");
     const fecha = r.fecha.split("-").reverse().join("-");
 
@@ -96,7 +94,6 @@ function renderHistorial(){
 // COPIAR HISTORIAL
 // =====================
 function copiarHistorial(){
-
   if(!historial.length){
     alert("No hay descargas registradas.");
     return;
@@ -116,10 +113,9 @@ function copiarHistorial(){
 }
 
 // =====================
-// ROLLBACK (DESHACER)
+// ROLLBACK
 // =====================
 function rollback(){
-
   if(!historial.length){
     alert("Nada que deshacer.");
     return;
@@ -128,13 +124,12 @@ function rollback(){
   if(!confirm("¿Deshacer última descarga?")) return;
 
   const ultimo = historial.pop();
-
   const idx = ultimo.isotanque - 1;
+
   stockPorIsotanque[idx] += ultimo.volumen;
 
   guardarStock();
   guardarHistorial();
-
   actualizarStockUI();
   renderHistorial();
 }
@@ -143,7 +138,6 @@ function rollback(){
 // TOTAL INICIAL AUTOMÁTICO
 // =====================
 function recalcularTotalInicial(){
-
   const cargas = [
     parseNumero(document.getElementById("saldoIso1").value),
     parseNumero(document.getElementById("saldoIso2").value),
@@ -164,16 +158,20 @@ function recalcularTotalInicial(){
 function interpolar(mm){
   if(mm===""||isNaN(mm)) return null;
   mm = Number(mm);
+
   if(mm < tabla[0].mm || mm > tabla[tabla.length-1].mm) return "fuera";
 
   for(let i=0;i<tabla.length-1;i++){
     const a=tabla[i];
     const b=tabla[i+1];
+
     if(mm>=a.mm && mm<=b.mm){
       const r=(mm-a.mm)/(b.mm-a.mm);
       return a.m3 + r*(b.m3-a.m3);
     }
   }
+
+  return null;
 }
 
 // =====================
@@ -198,7 +196,6 @@ function actualizar(){
 // REGISTRAR DESCARGA
 // =====================
 function registrarDescarga(volumen,tipo){
-
   if(volumen<=0) return;
 
   const centro=document.getElementById("centro").value.trim();
@@ -224,7 +221,6 @@ function registrarDescarga(volumen,tipo){
   });
 
   guardarHistorial();
-
   actualizarStockUI();
   renderHistorial();
 }
@@ -236,7 +232,9 @@ function registrarPorTramo(){
 function descargarIsotanqueCompleto(){
   const idx=isotanqueActualIndex();
   const stockActual=stockPorIsotanque[idx]||0;
+
   if(stockActual<=0) return alert("Sin stock.");
+
   registrarDescarga(stockActual,"completa");
 }
 
@@ -263,6 +261,27 @@ function nuevaCampana(){
 }
 
 // =====================
+// MODO OSCURO (NUEVO)
+// =====================
+function aplicarTemaGuardado(){
+  const tema = localStorage.getItem("temaVisual");
+  if(tema === "dark"){
+    document.body.setAttribute("data-theme","dark");
+  }
+}
+
+function alternarTema(){
+  const actual = document.body.getAttribute("data-theme");
+  if(actual === "dark"){
+    document.body.removeAttribute("data-theme");
+    localStorage.setItem("temaVisual","light");
+  } else {
+    document.body.setAttribute("data-theme","dark");
+    localStorage.setItem("temaVisual","dark");
+  }
+}
+
+// =====================
 // RESTAURAR
 // =====================
 window.addEventListener("load",()=>{
@@ -274,6 +293,7 @@ window.addEventListener("load",()=>{
   actualizarStockUI();
   actualizarCargaTotalInicialUI(totalBordo());
   renderHistorial();
+  aplicarTemaGuardado();
 });
 
 // =====================
