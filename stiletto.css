@@ -1,20 +1,18 @@
 :root {
 
-  /* Fondo más profundo, menos lavado */
-  --bg-main: #E3E8F0;
+  --bg-top: #E9EDF3;
+  --bg-bottom: #DDE3EC;
 
   --bg-card: #FFFFFF;
-
-  /* Bloque interno más claro para flotar */
-  --bg-soft: #F7F9FC;
+  --bg-soft: #F6F8FB;
 
   --text-primary: #1C2430;
-  --text-secondary: #7A8699;
+  --text-secondary: #8A94A6;
 
-  --accent: #1F4ED8; /* azul más profundo, menos eléctrico */
+  --accent: #1E40AF;
 
-  --shadow-main: 0 18px 40px rgba(15, 23, 42, 0.06);
-  --shadow-soft: 0 8px 20px rgba(15, 23, 42, 0.04);
+  --shadow-main: 0 24px 60px rgba(15, 23, 42, 0.08);
+  --shadow-soft: 0 10px 25px rgba(15, 23, 42, 0.05);
 }
 
 * {
@@ -24,22 +22,22 @@
 body {
   margin: 0;
   font-family: system-ui, -apple-system, sans-serif;
-  background: var(--bg-main);
+  background: linear-gradient(to bottom, var(--bg-top), var(--bg-bottom));
   color: var(--text-primary);
 }
 
 .layout {
-  max-width: 620px;
-  margin: 38px auto;
-  padding: 0 20px;
+  max-width: 640px;
+  margin: 40px auto;
+  padding: 0 22px;
 }
 
 /* LOGO */
 
 .logo {
-  width: 135px;
+  width: 140px;
   display: block;
-  margin: 0 auto 26px auto;
+  margin: 0 auto 30px auto;
 }
 
 /* =============================
@@ -48,26 +46,32 @@ body {
 
 .cardMain {
   background: var(--bg-card);
-  border-radius: 22px;
-  padding: 26px;
-  margin-bottom: 30px;
+  border-radius: 26px;
+  padding: 28px 26px 30px 26px;
+  margin-bottom: 34px;
   box-shadow: var(--shadow-main);
 }
 
-/* STOCK A BORDO */
+/* STOCK A BORDO (ajustado como mock) */
 
 .stockRow {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 18px;
-  font-size: 0.92rem;
+  margin-bottom: 16px;
+  font-size: 0.85rem;
   color: var(--text-secondary);
 }
 
 .stockRow strong {
-  font-weight: 600;
-  color: var(--text-primary);
+  font-weight: 500;
+  color: #2B3442;
+  font-size: 0.95rem;
+}
+
+.stockRow strong span {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
 }
 
 /* ISOTANQUE */
@@ -76,18 +80,18 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 18px;
+  margin-bottom: 20px;
   cursor: pointer;
 }
 
 .isoTitle {
-  font-size: 1.65rem;
-  font-weight: 600; /* menos pesado */
-  letter-spacing: -0.2px;
+  font-size: 1.8rem;
+  font-weight: 600;
+  letter-spacing: -0.3px;
 }
 
 .arrow {
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   color: var(--text-secondary);
 }
 
@@ -95,21 +99,21 @@ body {
 
 .isoValueBox {
   background: var(--bg-soft);
-  border-radius: 18px;
-  padding: 22px;
+  border-radius: 22px;
+  padding: 26px 28px;
   box-shadow: var(--shadow-soft);
 }
 
 .isoValue {
-  font-size: clamp(2.3rem, 5.8vw, 3rem);
-  font-weight: 600; /* menos pesado */
+  font-size: clamp(2.5rem, 6vw, 3.2rem);
+  font-weight: 600;
   color: var(--accent);
   white-space: nowrap;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 }
 
 .isoSub {
-  font-size: 0.82rem;
+  font-size: 0.85rem;
   color: var(--text-secondary);
 }
 
@@ -119,15 +123,15 @@ body {
 
 .card {
   background: var(--bg-card);
-  border-radius: 20px;
-  padding: 22px;
+  border-radius: 22px;
+  padding: 24px;
   margin-bottom: 28px;
   box-shadow: var(--shadow-soft);
 }
 
 h2 {
   margin: 0 0 14px 0;
-  font-size: 1.25rem;
+  font-size: 1.3rem;
   font-weight: 600;
 }
 
@@ -135,7 +139,7 @@ h2 {
 
 label {
   display: block;
-  font-size: 0.82rem;
+  font-size: 0.85rem;
   color: var(--text-secondary);
   margin-bottom: 6px;
 }
@@ -143,9 +147,9 @@ label {
 input {
   width: 100%;
   padding: 14px;
-  border-radius: 14px;
+  border-radius: 16px;
   border: none;
-  background: #F1F4F8;
+  background: #EFF2F7;
   margin-bottom: 14px;
   font-size: 0.95rem;
   transition: all 0.2s ease;
@@ -153,16 +157,16 @@ input {
 
 input:focus {
   outline: none;
-  background: #ffffff;
-  box-shadow: 0 0 0 2px rgba(31,78,216,0.15);
+  background: #FFFFFF;
+  box-shadow: 0 0 0 2px rgba(30,64,175,0.12);
 }
 
 /* RESULTADO */
 
 .resultado {
-  font-size: 1.15rem;
+  font-size: 1.2rem;
   font-weight: 600;
-  margin: 16px 0;
+  margin: 18px 0;
 }
 
 /* BOTONES */
@@ -170,17 +174,17 @@ input:focus {
 .btn {
   width: 100%;
   padding: 14px;
-  border-radius: 16px;
+  border-radius: 18px;
   border: none;
-  background: #E9EDF3;
+  background: #E7EBF2;
   cursor: pointer;
   margin-bottom: 12px;
-  font-size: 0.92rem;
+  font-size: 0.95rem;
   transition: all 0.15s ease;
 }
 
 .btn:hover {
-  background: #DDE3EB;
+  background: #DDE3EC;
 }
 
 .btn:active {
@@ -196,11 +200,11 @@ input:focus {
 .btnSec {
   flex: 1;
   padding: 12px;
-  border-radius: 14px;
+  border-radius: 16px;
   border: none;
-  background: #E9EDF3;
+  background: #E7EBF2;
   cursor: pointer;
-  font-size: 0.88rem;
+  font-size: 0.9rem;
 }
 
 .historial {
