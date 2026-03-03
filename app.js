@@ -116,7 +116,7 @@ function copiarHistorial(){
 }
 
 // =====================
-// ROLLBACK (DESHACER)
+// ROLLBACK
 // =====================
 function rollback(){
 
@@ -140,7 +140,7 @@ function rollback(){
 }
 
 // =====================
-// TOTAL INICIAL AUTOMÁTICO
+// TOTAL INICIAL
 // =====================
 function recalcularTotalInicial(){
 
@@ -164,7 +164,7 @@ function recalcularTotalInicial(){
 function interpolar(mm){
   if(mm===""||isNaN(mm)) return null;
   mm = Number(mm);
-  if(mm < tabla[0].mm || mm > tabla[tabla.length-1].mm) return "fuera";
+  if(mm < tabla[0].mm || mm > tabla[tabla.length-1].mm) return null;
 
   for(let i=0;i<tabla.length-1;i++){
     const a=tabla[i];
@@ -174,21 +174,41 @@ function interpolar(mm){
       return a.m3 + r*(b.m3-a.m3);
     }
   }
+  return null;
 }
 
 // =====================
-// CALCULO DESCARGA
+// CALCULO DESCARGA + EQUIVALENTES
 // =====================
 function actualizar(){
-  const A=interpolar(document.getElementById("nivelA").value);
-  const B=interpolar(document.getElementById("nivelB").value);
 
-  if(typeof A==="number"&&typeof B==="number"){
-    ultimoTotal=Math.abs(A-B);
+  const valorA = document.getElementById("nivelA").value;
+  const valorB = document.getElementById("nivelB").value;
+
+  const A = interpolar(valorA);
+  const B = interpolar(valorB);
+
+  const m3A = document.getElementById("m3A");
+  const m3B = document.getElementById("m3B");
+
+  if(typeof A === "number"){
+    m3A.textContent = `${A.toFixed(2)} m³`;
+  } else {
+    m3A.textContent = "—";
+  }
+
+  if(typeof B === "number"){
+    m3B.textContent = `${B.toFixed(2)} m³`;
+  } else {
+    m3B.textContent = "—";
+  }
+
+  if(typeof A === "number" && typeof B === "number"){
+    ultimoTotal = Math.abs(A - B);
     document.getElementById("resultado").textContent =
       `Total descargado: ${ultimoTotal.toFixed(2)} m³`;
-  }else{
-    ultimoTotal=0;
+  } else {
+    ultimoTotal = 0;
     document.getElementById("resultado").textContent =
       "Total descargado: —";
   }
@@ -266,6 +286,7 @@ function nuevaCampana(){
 // RESTAURAR
 // =====================
 window.addEventListener("load",()=>{
+
   document.getElementById("saldoIso1").value=stockPorIsotanque[0]||"";
   document.getElementById("saldoIso2").value=stockPorIsotanque[1]||"";
   document.getElementById("saldoIso3").value=stockPorIsotanque[2]||"";
