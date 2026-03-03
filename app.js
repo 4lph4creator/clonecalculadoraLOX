@@ -43,6 +43,27 @@ function guardarHistorial(){
 }
 
 // =====================
+// CAMPAÑA - TOTAL INICIAL
+// =====================
+function actualizarCargaTotalInicial(){
+  const v1 = Number(document.getElementById("saldoIso1")?.value) || 0;
+  const v2 = Number(document.getElementById("saldoIso2")?.value) || 0;
+  const v3 = Number(document.getElementById("saldoIso3")?.value) || 0;
+  const v4 = Number(document.getElementById("saldoIso4")?.value) || 0;
+
+  const total = v1 + v2 + v3 + v4;
+
+  const campoTotal = document.getElementById("cargaTotalInicial");
+  if(campoTotal){
+    campoTotal.value = total.toLocaleString("es-CL");
+  }
+
+  stockPorIsotanque = [v1, v2, v3, v4];
+  guardarStock();
+  actualizarStockUI();
+}
+
+// =====================
 // COLOR DINÁMICO
 // =====================
 function actualizarColorIsotanque(valor){
@@ -241,6 +262,7 @@ window.addEventListener("load",()=>{
 
   document.getElementById("nivelA")?.addEventListener("input",actualizar);
   document.getElementById("nivelB")?.addEventListener("input",actualizar);
+
   document.getElementById("registrar")?.addEventListener("click",registrarPorTramo);
   document.getElementById("descargaCompleta")?.addEventListener("click",descargarIsotanqueCompleto);
   document.getElementById("rollback")?.addEventListener("click",rollback);
@@ -253,6 +275,12 @@ window.addEventListener("load",()=>{
     actualizarStockUI();
   });
 
+  // Listeners campaña
+  ["saldoIso1","saldoIso2","saldoIso3","saldoIso4"].forEach(id=>{
+    document.getElementById(id)?.addEventListener("input",actualizarCargaTotalInicial);
+  });
+
+  actualizarCargaTotalInicial();
   actualizarStockUI();
   renderHistorial();
 });
