@@ -13,38 +13,41 @@
 
 <main class="layout">
 
-  <img src="img/logo_transparent.png" class="logo" alt="Logo LOX">
-  <h1>Calculadora LOX</h1>
+  <img src="img/logo_transparent.png" class="logo" alt="Frasal">
 
-  <!-- PANEL DE OPERACIÓN -->
+  <!-- STOCK A BORDO ARRIBA -->
+  <div class="stockBordoTop" id="saldoRestante">
+    Stock a bordo: 0.00 m³
+  </div>
+
+  <!-- BLOQUE ISOTANQUE -->
   <section class="panel cardSection panelOperacion">
 
-    <h2 class="panelHeader">
-      <span id="isoTitulo">Isotanque 1</span>
-
+    <div class="isoHeaderRow">
+      <div id="isoTitulo" class="isoTitulo">Isotanque 1</div>
       <div class="isoTabs">
         <button class="isoTab active" data-iso="1">1</button>
         <button class="isoTab" data-iso="2">2</button>
         <button class="isoTab" data-iso="3">3</button>
         <button class="isoTab" data-iso="4">4</button>
       </div>
-    </h2>
+    </div>
 
-    <!-- SELECT OCULTO (JS DEPENDE DE ESTO) -->
+    <!-- select oculto para JS -->
     <select id="isotanqueSelect" style="display:none;">
-      <option value="1">Isotanque 1</option>
-      <option value="2">Isotanque 2</option>
-      <option value="3">Isotanque 3</option>
-      <option value="4">Isotanque 4</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
     </select>
 
-    <div class="stockBigBlock">
-      <div id="stockIsotanque" class="stockMega">
+    <!-- TARJETA INTERNA VALOR -->
+    <div class="isoValueCard">
+      <div id="stockIsotanque" class="isoValorGrande">
         0.00 m³
       </div>
-
-      <div id="saldoRestante" class="stockBoard">
-        Stock a bordo: —
+      <div class="isoSubtexto">
+        Valor actual del isotanque
       </div>
     </div>
 
@@ -53,22 +56,18 @@
 
   </section>
 
-  <!-- ZONA DE OPERACIÓN -->
+  <!-- ZONA OPERACIÓN -->
   <section class="panel cardSection zonaOperacion">
 
     <h2>Zona de operación</h2>
 
-    <div class="inputGroup">
-      <label for="nivelA">Nivel A (mmH₂O)</label>
-      <input id="nivelA" type="number">
-      <div id="m3A" class="equivalente">—</div>
-    </div>
+    <label for="nivelA">Nivel A (mmH₂O)</label>
+    <input id="nivelA" type="number">
+    <div id="m3A" class="equivalente">—</div>
 
-    <div class="inputGroup">
-      <label for="nivelB">Nivel B (mmH₂O)</label>
-      <input id="nivelB" type="number">
-      <div id="m3B" class="equivalente">—</div>
-    </div>
+    <label for="nivelB">Nivel B (mmH₂O)</label>
+    <input id="nivelB" type="number">
+    <div id="m3B" class="equivalente">—</div>
 
     <div id="resultado" class="resultado">
       Total descargado: —
@@ -84,31 +83,27 @@
 
   </section>
 
-  <!-- CONFIGURAR CAMPAÑA -->
+  <!-- CONFIG CAMPAÑA -->
   <details class="panel cardSection panelConfig">
     <summary>Configurar campaña</summary>
 
-    <div class="configBody">
+    <label for="saldoIso1">Carga inicial Isotanque 1 (m³)</label>
+    <input id="saldoIso1" type="number">
 
-      <label for="saldoIso1">Carga inicial Isotanque 1 (m³)</label>
-      <input id="saldoIso1" type="number">
+    <label for="saldoIso2">Carga inicial Isotanque 2 (m³)</label>
+    <input id="saldoIso2" type="number">
 
-      <label for="saldoIso2">Carga inicial Isotanque 2 (m³)</label>
-      <input id="saldoIso2" type="number">
+    <label for="saldoIso3">Carga inicial Isotanque 3 (m³)</label>
+    <input id="saldoIso3" type="number">
 
-      <label for="saldoIso3">Carga inicial Isotanque 3 (m³)</label>
-      <input id="saldoIso3" type="number">
+    <label for="saldoIso4">Carga inicial Isotanque 4 (m³)</label>
+    <input id="saldoIso4" type="number">
 
-      <label for="saldoIso4">Carga inicial Isotanque 4 (m³)</label>
-      <input id="saldoIso4" type="number">
-
-      <label for="cargaTotalInicial">Carga total inicial (m³)</label>
-      <input id="cargaTotalInicial" type="number" readonly>
-
-    </div>
+    <label for="cargaTotalInicial">Carga total inicial (m³)</label>
+    <input id="cargaTotalInicial" type="number" readonly>
   </details>
 
-  <!-- CONTROL E HISTORIAL -->
+  <!-- CONTROL -->
   <section class="panel cardSection panelControl">
     <h2>Control e historial</h2>
 
@@ -119,15 +114,11 @@
       <button id="nuevaCampana" class="btnSec">Nueva campaña</button>
     </div>
 
-    <h3>Historial descargas</h3>
     <div id="historial" class="historial"></div>
   </section>
-
-  <div id="mensaje" class="error"></div>
 
 </main>
 
 <script src="app.js"></script>
-
 </body>
 </html>
