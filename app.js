@@ -46,6 +46,43 @@ function guardarHistorial(){
 }
 
 // =====================
+// COLOR DINÁMICO ISOTANQUE
+// =====================
+function actualizarColorIsotanque(valor){
+
+  const el = document.getElementById("stockIsotanque");
+
+  el.classList.remove("iso-normal","iso-warning","iso-critical");
+
+  if(valor >= 4000){
+    el.classList.add("iso-normal");
+  } else if(valor >= 3000){
+    el.classList.add("iso-warning");
+  } else {
+    el.classList.add("iso-critical");
+  }
+}
+
+// =====================
+// ACTUALIZAR UI
+// =====================
+function actualizarStockUI(){
+
+  const idx = isotanqueActualIndex();
+  const stockActual = stockPorIsotanque[idx] || 0;
+
+  const isoEl = document.getElementById("stockIsotanque");
+
+  isoEl.textContent =
+    stockActual.toLocaleString("es-CL", {minimumFractionDigits:2}) + " m³";
+
+  actualizarColorIsotanque(stockActual);
+
+  document.getElementById("saldoRestante").textContent =
+    totalBordo().toLocaleString("es-CL", {minimumFractionDigits:2}) + " m³";
+}
+
+// =====================
 // INTERPOLACIÓN
 // =====================
 function interpolar(mm){
@@ -62,23 +99,6 @@ function interpolar(mm){
     }
   }
   return null;
-}
-
-// =====================
-// ACTUALIZAR UI
-// =====================
-function actualizarStockUI(){
-
-  const idx = isotanqueActualIndex();
-  const stockActual = stockPorIsotanque[idx] || 0;
-
-  // Valor grande
-  document.getElementById("stockIsotanque").textContent =
-    stockActual.toLocaleString("es-CL", {minimumFractionDigits:2}) + " m³";
-
-  // Stock total arriba
-  document.getElementById("saldoRestante").textContent =
-    totalBordo().toLocaleString("es-CL", {minimumFractionDigits:2}) + " m³";
 }
 
 // =====================
@@ -152,6 +172,7 @@ function descargarIsotanqueCompleto(){
   const idx=isotanqueActualIndex();
   const stockActual=stockPorIsotanque[idx]||0;
   if(stockActual<=0) return alert("Sin stock.");
+  if(!confirm("¿Confirmar descarga completa del isotanque?")) return;
   registrarDescarga(stockActual,"completa");
 }
 
@@ -216,7 +237,7 @@ function recalcularTotalInicial(){
 }
 
 // =====================
-// SELECTOR DISCRETO ISOTANQUE
+// SELECTOR ISOTANQUE
 // =====================
 document.getElementById("isoSelector")
   .addEventListener("click", function(){
