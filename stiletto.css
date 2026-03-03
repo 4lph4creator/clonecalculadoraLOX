@@ -4,15 +4,15 @@
   --bg-bottom: #DDE3EC;
 
   --bg-card: #FFFFFF;
-  --bg-soft: #F9FAFC;
+  --bg-soft: #FBFCFE;
 
   --text-primary: #1C2430;
   --text-secondary: #8A94A6;
 
-  --accent: #2B5FC7;
+  --accent: #274B9F;
 
-  --shadow-main: 0 24px 60px rgba(15, 23, 42, 0.08);
-  --shadow-soft: 0 8px 20px rgba(15, 23, 42, 0.04);
+  --shadow-main: 0 22px 55px rgba(15, 23, 42, 0.07);
+  --shadow-soft: 0 6px 16px rgba(15, 23, 42, 0.035);
 }
 
 * {
@@ -27,17 +27,17 @@ body {
 }
 
 .layout {
-  max-width: 640px;
-  margin: 40px auto;
-  padding: 0 22px;
+  max-width: 620px;
+  margin: 36px auto;
+  padding: 0 20px;
 }
 
 /* LOGO */
 
 .logo {
-  width: 140px;
+  width: 135px;
   display: block;
-  margin: 0 auto 30px auto;
+  margin: 0 auto 26px auto;
 }
 
 /* =============================
@@ -46,9 +46,9 @@ body {
 
 .cardMain {
   background: var(--bg-card);
-  border-radius: 26px;
-  padding: 26px 24px 28px 24px;
-  margin-bottom: 34px;
+  border-radius: 24px;
+  padding: 24px 22px 26px 22px;
+  margin-bottom: 32px;
   box-shadow: var(--shadow-main);
 }
 
@@ -58,19 +58,19 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 14px;
-  font-size: 0.85rem;
+  margin-bottom: 12px;
+  font-size: 0.8rem;
   color: var(--text-secondary);
 }
 
 .stockRow strong {
   font-weight: 500;
-  color: #2B3442;
-  font-size: 0.95rem;
+  color: #2C3442;
+  font-size: 0.9rem;
 }
 
 .stockRow strong span {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   color: var(--text-secondary);
 }
 
@@ -80,18 +80,18 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
   cursor: pointer;
 }
 
 .isoTitle {
-  font-size: 1.8rem;
+  font-size: 1.7rem;
   font-weight: 600;
   letter-spacing: -0.3px;
 }
 
 .arrow {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   color: var(--text-secondary);
 }
 
@@ -99,21 +99,21 @@ body {
 
 .isoValueBox {
   background: var(--bg-soft);
-  border-radius: 20px;
-  padding: 22px 24px;
+  border-radius: 18px;
+  padding: 18px 20px;
   box-shadow: var(--shadow-soft);
 }
 
 .isoValue {
-  font-size: clamp(2.5rem, 6vw, 3.2rem);
+  font-size: clamp(2.3rem, 5.5vw, 2.9rem);
   font-weight: 600;
   color: var(--accent);
   white-space: nowrap;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
 .isoSub {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: var(--text-secondary);
 }
 
@@ -123,15 +123,15 @@ body {
 
 .card {
   background: var(--bg-card);
-  border-radius: 22px;
-  padding: 22px;
-  margin-bottom: 28px;
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 26px;
   box-shadow: var(--shadow-soft);
 }
 
 h2 {
-  margin: 0 0 14px 0;
-  font-size: 1.3rem;
+  margin: 0 0 12px 0;
+  font-size: 1.25rem;
   font-weight: 600;
 }
 
@@ -139,47 +139,47 @@ h2 {
 
 label {
   display: block;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: var(--text-secondary);
   margin-bottom: 6px;
 }
 
 input {
   width: 100%;
-  padding: 14px;
-  border-radius: 16px;
+  padding: 13px;
+  border-radius: 14px;
   border: none;
-  background: #EFF2F7;
+  background: #F1F4F9;
   margin-bottom: 14px;
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   transition: all 0.2s ease;
 }
 
 input:focus {
   outline: none;
   background: #FFFFFF;
-  box-shadow: 0 0 0 2px rgba(43,95,199,0.12);
+  box-shadow: 0 0 0 2px rgba(39,75,159,0.12);
 }
 
 /* RESULTADO */
 
 .resultado {
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   font-weight: 600;
-  margin: 18px 0;
+  margin: 16px 0;
 }
 
 /* BOTONES */
 
 .btn {
   width: 100%;
-  padding: 14px;
-  border-radius: 18px;
+  padding: 13px;
+  border-radius: 16px;
   border: none;
-  background: #E7EBF2;
+  background: #E8EDF5;
   cursor: pointer;
-  margin-bottom: 12px;
-  font-size: 0.95rem;
+  margin-bottom: 10px;
+  font-size: 0.92rem;
   transition: all 0.15s ease;
 }
 
@@ -188,26 +188,26 @@ input:focus {
 }
 
 .btn:active {
-  transform: scale(0.98);
+  transform: scale(0.985);
 }
 
 .adminRow {
   display: flex;
-  gap: 10px;
-  margin-bottom: 14px;
+  gap: 8px;
+  margin-bottom: 12px;
 }
 
 .btnSec {
   flex: 1;
-  padding: 12px;
-  border-radius: 16px;
+  padding: 11px;
+  border-radius: 14px;
   border: none;
-  background: #E7EBF2;
+  background: #E8EDF5;
   cursor: pointer;
-  font-size: 0.9rem;
+  font-size: 0.88rem;
 }
 
 .historial {
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   line-height: 1.5;
 }
