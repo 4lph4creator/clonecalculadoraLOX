@@ -1,198 +1,205 @@
-/* ===== RESET ===== */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+/* =========================
+   BASE
+========================= */
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  background:#dfe3e8;
+  color:#1f2a37;
 }
 
-body {
-  background: #eef1f5;
-  color: #1e1f23;
+.layout{
+  max-width:480px;
+  margin:0 auto;
+  padding:24px 18px 60px;
 }
 
-.layout {
-  max-width: 520px;
-  margin: 0 auto;
-  padding: 28px 18px 60px;
+.logo{
+  display:block;
+  margin:0 auto 28px;
+  width:140px;
 }
 
-/* ===== LOGO ===== */
-.logo {
-  display: block;
-  margin: 10px auto 28px;
-  max-width: 140px;
-}
-
-/* ===== CARDS ===== */
+/* =========================
+   CARDS
+========================= */
 .cardMain,
-.card {
-  background: #ffffff;
-  border-radius: 22px;
-  padding: 22px 20px;
-  margin-bottom: 24px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
+.card{
+  background:#f7f8fa;
+  border-radius:22px;
+  padding:22px;
+  margin-bottom:22px;
+  box-shadow:0 8px 24px rgba(0,0,0,0.06);
 }
 
-.card h2 {
-  font-size: 20px;
-  margin-bottom: 18px;
-  font-weight: 600;
+/* =========================
+   STOCK A BORDO (MOCK STYLE)
+========================= */
+.stockRow{
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  margin-bottom:18px;
 }
 
-/* ===== STOCK ===== */
-.stockRow {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 14px;
-  margin-bottom: 10px;
-  color: #6b6f76;
+.stockRow span{
+  font-size:15px;
+  color:#6b7280;
+  font-weight:400;
 }
 
-.stockRow strong {
-  font-weight: 600;
-  color: #1e1f23;
+#saldoRestante{
+  font-size:22px;
+  font-weight:700;
+  letter-spacing:0.3px;
+  color:#1f2a37;
 }
 
-/* ===== ISO SELECTOR ===== */
-.isoSelector {
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 18px;
-  cursor: pointer;
+/* =========================
+   ISOTANQUE HEADER
+========================= */
+.isoSelector{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  cursor:pointer;
+  margin-bottom:18px;
 }
 
-.isoTitle {
-  font-size: 26px;
-  font-weight: 700;
+.isoTitle{
+  font-size:30px;
+  font-weight:700;
+  color:#111827;
 }
 
-.arrow {
-  font-size: 20px;
-  color: #9aa0a6;
+.arrow{
+  font-size:26px;
+  color:#9ca3af;
 }
 
-/* Select invisible pero funcional */
-.isoOverlaySelect {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  cursor: pointer;
+/* =========================
+   ISO VALUE BOX
+========================= */
+.isoValueBox{
+  background:#e9edf3;
+  border-radius:18px;
+  padding:26px;
 }
 
-/* ===== ISO VALUE ===== */
-.isoValueBox {
-  background: #f4f6f9;
-  border-radius: 18px;
-  padding: 24px 20px;
+.isoValue{
+  font-size:42px;
+  font-weight:700;
+  letter-spacing:0.5px;
+  margin-bottom:8px;
 }
 
-.isoValue {
-  font-size: 42px;
-  font-weight: 700;
-  color: #2e5fb8;
-  margin-bottom: 6px;
+.isoSub{
+  font-size:14px;
+  color:#6b7280;
 }
 
-/* Bajo nivel crítico */
-.isoValue.critical {
-  color: #b23a3a;
+/* =========================
+   COLORES DINÁMICOS
+========================= */
+.iso-normal{
+  color:#2f5fb3;
 }
 
-.isoSub {
-  font-size: 14px;
-  color: #7a7f87;
+.iso-warning{
+  color:#b38a2f;
 }
 
-/* ===== FORM ===== */
-label {
-  display: block;
-  font-size: 14px;
-  margin-top: 14px;
-  margin-bottom: 6px;
-  color: #6b6f76;
+.iso-critical{
+  color:#b32f2f;
 }
 
-input {
-  width: 100%;
-  padding: 12px 14px;
-  border-radius: 12px;
-  border: none;
-  background: #eef1f5;
-  font-size: 15px;
-  margin-bottom: 6px;
+/* =========================
+   FORMULARIOS
+========================= */
+h2{
+  font-size:22px;
+  margin-bottom:14px;
 }
 
-input:focus {
-  outline: none;
-  background: #e6ebf2;
+label{
+  display:block;
+  font-size:14px;
+  color:#6b7280;
+  margin-bottom:6px;
+  margin-top:14px;
 }
 
-.equivalente {
-  font-size: 13px;
-  color: #7a7f87;
+input{
+  width:100%;
+  padding:14px 16px;
+  border:none;
+  border-radius:14px;
+  background:#e9edf3;
+  font-size:16px;
+  outline:none;
 }
 
-.resultado {
-  margin-top: 14px;
-  font-weight: 600;
-  font-size: 15px;
+input:focus{
+  background:#e2e8f0;
 }
 
-/* ===== BOTONES PRINCIPALES ===== */
-.btn {
-  width: 100%;
-  margin-top: 14px;
-  padding: 14px;
-  border-radius: 16px;
-  border: none;
-  background: #2e5fb8;
-  color: white;
-  font-weight: 600;
-  cursor: pointer;
-  transition: opacity 0.2s ease;
+.equivalente{
+  font-size:14px;
+  color:#6b7280;
+  margin-top:4px;
 }
 
-.btn:active {
-  opacity: 0.9;
+.resultado{
+  font-size:16px;
+  margin-top:16px;
+  font-weight:600;
 }
 
-/* ===== BOTONES SECUNDARIOS ===== */
-.adminRow {
-  display: flex;
-  gap: 12px;
-  margin-top: 14px;
+/* =========================
+   BOTONES
+========================= */
+.btn{
+  width:100%;
+  margin-top:14px;
+  padding:15px;
+  border:none;
+  border-radius:18px;
+  font-size:16px;
+  font-weight:600;
+  background:#355fae;
+  color:white;
+  cursor:pointer;
 }
 
-.btnSec {
-  flex: 1;
-  padding: 12px;
-  border-radius: 14px;
-  border: none;
-  background: #eef1f5;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.2s ease;
+.btn:hover{
+  opacity:0.92;
 }
 
-.btnSec:hover {
-  background: #e2e6ed;
+.btnSec{
+  flex:1;
+  padding:12px;
+  border:none;
+  border-radius:14px;
+  background:#e9edf3;
+  font-weight:500;
 }
 
-/* ===== HISTORIAL ===== */
-.historial {
-  margin-top: 14px;
-  font-size: 13px;
-  color: #555;
+.adminRow{
+  display:flex;
+  gap:12px;
+  margin-top:14px;
 }
 
-/* ===== DETAILS ===== */
-details summary {
-  font-weight: 600;
-  cursor: pointer;
+/* =========================
+   HISTORIAL
+========================= */
+.historial{
+  margin-top:16px;
+  font-size:14px;
+  color:#374151;
+}
+
+.historial div{
+  padding:8px 0;
+  border-bottom:1px solid rgba(0,0,0,0.05);
 }
