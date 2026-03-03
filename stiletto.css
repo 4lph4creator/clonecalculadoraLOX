@@ -2,34 +2,12 @@
   --bg-main: #F2F4F7;
   --bg-card: #FFFFFF;
   --bg-input: #F8FAFC;
-
   --text-primary: #1C2430;
   --text-secondary: #6B7280;
-
   --border-soft: #E5E7EB;
-
   --accent-highlight: #2563EB;
-
   --btn-bg: #E5E7EB;
   --btn-hover: #D1D5DB;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg-main: #0F172A;
-    --bg-card: #1E293B;
-    --bg-input: #263143;
-
-    --text-primary: #F1F5F9;
-    --text-secondary: #94A3B8;
-
-    --border-soft: #334155;
-
-    --accent-highlight: #3B82F6;
-
-    --btn-bg: #334155;
-    --btn-hover: #475569;
-  }
 }
 
 body {
@@ -57,83 +35,89 @@ h1 {
   margin-bottom: 30px;
 }
 
-.panel {
-  margin-bottom: 24px;
-}
-
 .cardSection {
   background: var(--bg-card);
   border-radius: 20px;
   padding: 24px;
+  margin-bottom: 24px;
   border: 1px solid var(--border-soft);
 }
 
-h2 {
-  margin-top: 0;
+/* HEADER */
+.panelHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.3rem;
   font-weight: 600;
+  margin-bottom: 20px;
 }
 
+.isoTabs {
+  display: flex;
+  gap: 6px;
+}
+
+.isoTab {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid var(--border-soft);
+  background: var(--bg-input);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.isoTab.active {
+  background: var(--accent-highlight);
+  color: white;
+}
+
+/* STOCK */
+.stockMega {
+  font-size: 2.6rem;
+  font-weight: 600;
+  color: var(--accent-highlight);
+}
+
+.stockBoard {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+/* INPUTS */
 label {
-  display: block;
   font-size: 0.85rem;
   color: var(--text-secondary);
+  display: block;
   margin-bottom: 6px;
 }
 
-input,
-select {
+input {
   width: 100%;
   padding: 12px;
   border-radius: 14px;
   border: 1px solid var(--border-soft);
   background: var(--bg-input);
-  color: var(--text-primary);
   margin-bottom: 16px;
-  font-size: 0.95rem;
-  box-sizing: border-box;
 }
 
-.stockBlock {
-  margin: 15px 0 20px 0;
-}
-
-.stockPrincipal {
-  font-size: 1.8rem;
-  font-weight: 600;
-  color: var(--accent-highlight);
-  margin-bottom: 8px;
-}
-
-.stockSecundario {
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-}
-
-.inputGroup {
-  margin-bottom: 20px;
-}
-
-.equivalente {
-  font-size: 0.85rem;
-  color: var(--text-secondary);
-}
-
+/* RESULTADO */
 .resultado {
   font-size: 1.2rem;
   font-weight: 600;
   margin: 20px 0;
 }
 
+/* BOTONES */
 .btn {
   width: 100%;
   padding: 14px;
   border-radius: 14px;
   border: 1px solid var(--border-soft);
   background: var(--btn-bg);
-  color: var(--text-primary);
   margin-bottom: 12px;
   cursor: pointer;
-  transition: 0.2s ease;
 }
 
 .btn:hover {
@@ -146,7 +130,6 @@ select {
   border-radius: 14px;
   border: 1px solid var(--border-soft);
   background: var(--btn-bg);
-  color: var(--text-primary);
   cursor: pointer;
 }
 
@@ -158,11 +141,4 @@ select {
 
 .historial {
   font-size: 0.85rem;
-  line-height: 1.4;
-}
-
-.error {
-  text-align: center;
-  color: red;
-  margin-top: 20px;
 }
