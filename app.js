@@ -29,7 +29,9 @@ let historial =
 // =====================
 function parseNumero(valor){
   if(!valor) return 0;
-  valor = valor.trim().replace(",", ".").replace(/[^0-9.]/g, "");
+  valor = valor.trim();
+  valor = valor.replace(",", ".");
+  valor = valor.replace(/[^0-9.]/g, "");
   return parseFloat(valor) || 0;
 }
 
@@ -72,12 +74,14 @@ function actualizarCargaTotalInicialUI(valor){
 // HISTORIAL
 // =====================
 function renderHistorial(){
+
   const cont = document.getElementById("historial");
   if(!cont) return;
 
   cont.innerHTML = "";
 
   [...historial].reverse().forEach(r=>{
+
     const div = document.createElement("div");
     const fecha = r.fecha.split("-").reverse().join("-");
 
@@ -92,6 +96,7 @@ function renderHistorial(){
 // COPIAR HISTORIAL
 // =====================
 function copiarHistorial(){
+
   if(!historial.length){
     alert("No hay descargas registradas.");
     return;
@@ -111,9 +116,10 @@ function copiarHistorial(){
 }
 
 // =====================
-// ROLLBACK
+// ROLLBACK (DESHACER)
 // =====================
 function rollback(){
+
   if(!historial.length){
     alert("Nada que deshacer.");
     return;
@@ -122,20 +128,22 @@ function rollback(){
   if(!confirm("¿Deshacer última descarga?")) return;
 
   const ultimo = historial.pop();
-  const idx = ultimo.isotanque - 1;
 
+  const idx = ultimo.isotanque - 1;
   stockPorIsotanque[idx] += ultimo.volumen;
 
   guardarStock();
   guardarHistorial();
+
   actualizarStockUI();
   renderHistorial();
 }
 
 // =====================
-// TOTAL INICIAL
+// TOTAL INICIAL AUTOMÁTICO
 // =====================
 function recalcularTotalInicial(){
+
   const cargas = [
     parseNumero(document.getElementById("saldoIso1").value),
     parseNumero(document.getElementById("saldoIso2").value),
@@ -156,23 +164,20 @@ function recalcularTotalInicial(){
 function interpolar(mm){
   if(mm===""||isNaN(mm)) return null;
   mm = Number(mm);
-
   if(mm < tabla[0].mm || mm > tabla[tabla.length-1].mm) return "fuera";
 
   for(let i=0;i<tabla.length-1;i++){
     const a=tabla[i];
     const b=tabla[i+1];
-
     if(mm>=a.mm && mm<=b.mm){
       const r=(mm-a.mm)/(b.mm-a.mm);
       return a.m3 + r*(b.m3-a.m3);
     }
   }
-  return null;
 }
 
 // =====================
-// CALCULO
+// CALCULO DESCARGA
 // =====================
 function actualizar(){
   const A=interpolar(document.getElementById("nivelA").value);
@@ -190,9 +195,10 @@ function actualizar(){
 }
 
 // =====================
-// REGISTRAR
+// REGISTRAR DESCARGA
 // =====================
 function registrarDescarga(volumen,tipo){
+
   if(volumen<=0) return;
 
   const centro=document.getElementById("centro").value.trim();
@@ -218,6 +224,7 @@ function registrarDescarga(volumen,tipo){
   });
 
   guardarHistorial();
+
   actualizarStockUI();
   renderHistorial();
 }
@@ -229,7 +236,6 @@ function registrarPorTramo(){
 function descargarIsotanqueCompleto(){
   const idx=isotanqueActualIndex();
   const stockActual=stockPorIsotanque[idx]||0;
-
   if(stockActual<=0) return alert("Sin stock.");
   registrarDescarga(stockActual,"completa");
 }
@@ -257,40 +263,6 @@ function nuevaCampana(){
 }
 
 // =====================
-// TEMA AUTOMÁTICO
-// =====================
-function detectarPreferenciaSistema(){
-  return window.matchMedia &&
-         window.matchMedia("(prefers-color-scheme: dark)").matches;
-}
-
-function aplicarTema(tema){
-  if(tema === "dark"){
-    document.body.setAttribute("data-theme","dark");
-  } else {
-    document.body.removeAttribute("data-theme");
-  }
-}
-
-function inicializarTema(){
-  const guardado = localStorage.getItem("temaVisual");
-
-  if(guardado){
-    aplicarTema(guardado);
-  } else {
-    aplicarTema(detectarPreferenciaSistema() ? "dark" : "light");
-  }
-}
-
-function alternarTema(){
-  const actual = document.body.getAttribute("data-theme") === "dark" ? "dark" : "light";
-  const nuevo = actual === "dark" ? "light" : "dark";
-
-  aplicarTema(nuevo);
-  localStorage.setItem("temaVisual", nuevo);
-}
-
-// =====================
 // RESTAURAR
 // =====================
 window.addEventListener("load",()=>{
@@ -302,7 +274,6 @@ window.addEventListener("load",()=>{
   actualizarStockUI();
   actualizarCargaTotalInicialUI(totalBordo());
   renderHistorial();
-  inicializarTema();
 });
 
 // =====================
