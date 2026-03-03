@@ -40,7 +40,7 @@ body {
   font-weight: 600;
 }
 
-/* ===== STOCK ROW ===== */
+/* ===== STOCK ===== */
 .stockRow {
   display: flex;
   justify-content: space-between;
@@ -55,17 +55,13 @@ body {
   color: #1e1f23;
 }
 
-/* ===== ISO SELECTOR ===== */
+/* ===== ISO SELECTOR VISUAL ===== */
 .isoSelector {
-  position: relative;
-  margin-bottom: 18px;
-}
-
-.isoTitleWrapper {
   display: flex;
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
+  margin-bottom: 18px;
 }
 
 .isoTitle {
@@ -78,38 +74,16 @@ body {
   color: #9aa0a6;
 }
 
-/* Dropdown */
-.isoDropdown {
-  display: none;
-  margin-top: 12px;
-  padding: 10px;
-  background: #f4f6f9;
-  border-radius: 14px;
-  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.04);
-  gap: 8px;
+/* ===== OCULTAR SELECT REAL ===== */
+.isoNative {
+  position: absolute;
+  left: -9999px;
+  width: 0;
+  height: 0;
+  opacity: 0;
 }
 
-.isoDropdown.show {
-  display: flex;
-}
-
-.isoOption {
-  flex: 1;
-  border: none;
-  background: #e2e6ed;
-  padding: 8px 0;
-  border-radius: 10px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: 0.2s ease;
-}
-
-.isoOption.active {
-  background: #2e5fb8;
-  color: white;
-}
-
-/* ===== ISO VALUE BOX ===== */
+/* ===== ISO VALUE ===== */
 .isoValueBox {
   background: #f4f6f9;
   border-radius: 18px;
@@ -120,7 +94,7 @@ body {
 .isoValue {
   font-size: 42px;
   font-weight: 700;
-  color: #2e5fb8; /* azul más sobrio */
+  color: #2e5fb8;
   margin-bottom: 6px;
 }
 
@@ -182,11 +156,6 @@ input:focus {
   color: white;
   font-weight: 600;
   cursor: pointer;
-  transition: 0.2s ease;
-}
-
-.btn:hover {
-  opacity: 0.9;
 }
 
 .btnSec {
