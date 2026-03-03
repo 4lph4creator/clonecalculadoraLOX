@@ -237,20 +237,42 @@ function recalcularTotalInicial(){
 }
 
 // =====================
-// SELECTOR ISOTANQUE
+// SELECTOR DROPDOWN PREMIUM
 // =====================
-document.getElementById("isoSelector")
-  .addEventListener("click", function(){
+document.addEventListener("DOMContentLoaded", function(){
 
-    let actual = Number(document.getElementById("isotanqueSelect").value);
-    actual++;
-    if(actual > 4) actual = 1;
+  const isoSelector = document.getElementById("isoSelector");
+  const isoDropdown = document.getElementById("isoDropdown");
+  const isoTitulo = document.getElementById("isoTitulo");
+  const selectHidden = document.getElementById("isotanqueSelect");
+  const isoOptions = document.querySelectorAll(".isoOption");
 
-    document.getElementById("isotanqueSelect").value = actual;
-    document.getElementById("isoTitulo").textContent =
-      "Isotanque " + actual;
+  isoSelector.addEventListener("click", function(e){
+    e.stopPropagation();
+    isoDropdown.classList.toggle("show");
+  });
 
-    actualizarStockUI();
+  isoOptions.forEach(btn=>{
+    btn.addEventListener("click", function(e){
+
+      e.stopPropagation();
+
+      isoOptions.forEach(b=>b.classList.remove("active"));
+      btn.classList.add("active");
+
+      const iso = btn.dataset.iso;
+      selectHidden.value = iso;
+      isoTitulo.textContent = "Isotanque " + iso;
+
+      isoDropdown.classList.remove("show");
+
+      actualizarStockUI();
+    });
+  });
+
+  document.addEventListener("click", function(){
+    isoDropdown.classList.remove("show");
+  });
 });
 
 // =====================
