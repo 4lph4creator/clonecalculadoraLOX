@@ -2,9 +2,8 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Calculadora LO₂</title>
+  <title>Calculadora LOX</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <link rel="stylesheet" href="stiletto.css">
   <link rel="manifest" href="manifest.json">
 </head>
@@ -15,25 +14,19 @@
 
   <img src="img/logo_transparent.png" class="logo" alt="Frasal">
 
-  <!-- STOCK A BORDO ARRIBA -->
-  <div class="stockBordoTop" id="saldoRestante">
-    Stock a bordo: 0.00 m³
-  </div>
+  <!-- BLOQUE SUPERIOR -->
+  <section class="cardMain">
 
-  <!-- BLOQUE ISOTANQUE -->
-  <section class="panel cardSection panelOperacion">
-
-    <div class="isoHeaderRow">
-      <div id="isoTitulo" class="isoTitulo">Isotanque 1</div>
-      <div class="isoTabs">
-        <button class="isoTab active" data-iso="1">1</button>
-        <button class="isoTab" data-iso="2">2</button>
-        <button class="isoTab" data-iso="3">3</button>
-        <button class="isoTab" data-iso="4">4</button>
-      </div>
+    <div class="stockRow">
+      <span>Stock a bordo:</span>
+      <strong id="saldoRestante">0.00 m³</strong>
     </div>
 
-    <!-- select oculto para JS -->
+    <div class="isoSelector" id="isoSelector">
+      <div id="isoTitulo" class="isoTitle">Isotanque 1</div>
+      <div class="arrow">›</div>
+    </div>
+
     <select id="isotanqueSelect" style="display:none;">
       <option value="1">1</option>
       <option value="2">2</option>
@@ -41,25 +34,24 @@
       <option value="4">4</option>
     </select>
 
-    <!-- TARJETA INTERNA VALOR -->
-    <div class="isoValueCard">
-      <div id="stockIsotanque" class="isoValorGrande">
+    <div class="isoValueBox">
+      <div id="stockIsotanque" class="isoValue">
         0.00 m³
       </div>
-      <div class="isoSubtexto">
+      <div class="isoSub">
         Valor actual del isotanque
       </div>
     </div>
 
-    <label for="centro">Centro</label>
-    <input id="centro" type="text" placeholder="Ej: C. Contao">
-
   </section>
 
-  <!-- ZONA OPERACIÓN -->
-  <section class="panel cardSection zonaOperacion">
+  <!-- ZONA DE OPERACIÓN -->
+  <section class="card">
 
     <h2>Zona de operación</h2>
+
+    <label for="centro">Centro</label>
+    <input id="centro" type="text" placeholder="Ej: C. Contao">
 
     <label for="nivelA">Nivel A (mmH₂O)</label>
     <input id="nivelA" type="number">
@@ -84,7 +76,7 @@
   </section>
 
   <!-- CONFIG CAMPAÑA -->
-  <details class="panel cardSection panelConfig">
+  <details class="card">
     <summary>Configurar campaña</summary>
 
     <label for="saldoIso1">Carga inicial Isotanque 1 (m³)</label>
@@ -104,7 +96,7 @@
   </details>
 
   <!-- CONTROL -->
-  <section class="panel cardSection panelControl">
+  <section class="card">
     <h2>Control e historial</h2>
 
     <button id="exportar" class="btn">Copiar historial</button>
