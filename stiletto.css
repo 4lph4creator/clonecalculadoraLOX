@@ -1,8 +1,8 @@
 :root {
 
-  --bg-main: #F3F5F8;
+  --bg-main: #EEF2F7;
   --bg-card: #FFFFFF;
-  --bg-soft: #F7F9FC;
+  --bg-soft: #F4F6FA;
 
   --text-primary: #1F2937;
   --text-secondary: #6B7280;
@@ -15,6 +15,10 @@
   --btn-hover: #D1D5DB;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: system-ui, -apple-system, sans-serif;
@@ -24,127 +28,147 @@ body {
 
 .layout {
   max-width: 620px;
-  margin: 30px auto;
-  padding: 0 18px;
+  margin: 40px auto;
+  padding: 0 20px;
 }
 
 /* LOGO */
 .logo {
-  width: 130px;
+  width: 140px;
   display: block;
-  margin: 20px auto 25px auto;
+  margin: 10px auto 30px auto;
 }
 
-/* STOCK A BORDO ARRIBA */
-.stockBordoTop {
-  font-size: 1.1rem;
-  margin-bottom: 20px;
-  text-align: center;
-}
+/* =============================
+   TARJETA PRINCIPAL (SUPERIOR)
+============================= */
 
-.stockBordoTop strong {
-  font-weight: 600;
-}
-
-/* TARJETAS */
-.cardSection {
+.cardMain {
   background: var(--bg-card);
-  border-radius: 22px;
-  padding: 24px;
-  margin-bottom: 26px;
+  border-radius: 24px;
+  padding: 32px;
+  margin-bottom: 30px;
   border: 1px solid var(--border-soft);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.05);
 }
 
-/* HEADER ISOTANQUE */
-.isoHeaderRow {
+/* STOCK A BORDO */
+.stockRow {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
-}
-
-.isoTitulo {
-  font-size: 1.6rem;
-  font-weight: 600;
-}
-
-.isoTabs {
-  display: flex;
-  gap: 6px;
-}
-
-.isoTab {
-  width: 30px;
-  height: 30px;
-  border-radius: 8px;
-  border: 1px solid var(--border-soft);
-  background: var(--bg-soft);
-  cursor: pointer;
-  font-weight: 600;
-}
-
-.isoTab.active {
-  background: var(--accent);
-  color: white;
-  border-color: var(--accent);
-}
-
-/* TARJETA INTERNA VALOR */
-.isoValueCard {
-  background: var(--bg-soft);
-  border-radius: 18px;
-  padding: 22px;
-  margin-bottom: 24px;
-  border: 1px solid var(--border-soft);
-}
-
-.isoValorGrande {
-  font-size: 2.8rem;
-  font-weight: 600;
-  color: var(--accent);
-  margin-bottom: 6px;
-}
-
-.isoSubtexto {
-  font-size: 0.9rem;
+  margin-bottom: 22px;
+  font-size: 1rem;
   color: var(--text-secondary);
 }
 
-/* FORM */
+.stockRow strong {
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+/* SELECTOR ISOTANQUE */
+.isoSelector {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  margin-bottom: 26px;
+}
+
+.isoTitle {
+  font-size: 1.9rem;
+  font-weight: 700;
+}
+
+.arrow {
+  font-size: 1.5rem;
+  color: var(--text-secondary);
+}
+
+/* TARJETA INTERNA VALOR */
+.isoValueBox {
+  background: var(--bg-soft);
+  border-radius: 22px;
+  padding: 34px;
+  border: 1px solid var(--border-soft);
+}
+
+.isoValue {
+  font-size: 3.2rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+.isoSub {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+/* =============================
+   TARJETAS GENERALES
+============================= */
+
+.card {
+  background: var(--bg-card);
+  border-radius: 22px;
+  padding: 28px;
+  margin-bottom: 30px;
+  border: 1px solid var(--border-soft);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+}
+
+h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 1.4rem;
+}
+
+/* FORMULARIOS */
+
 label {
   display: block;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   color: var(--text-secondary);
   margin-bottom: 6px;
 }
 
 input {
   width: 100%;
-  padding: 14px;
-  border-radius: 14px;
+  padding: 16px;
+  border-radius: 16px;
   border: 1px solid var(--border-soft);
   background: var(--bg-soft);
   margin-bottom: 18px;
   font-size: 1rem;
 }
 
+/* EQUIVALENTE */
+.equivalente {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+}
+
 /* RESULTADO */
 .resultado {
-  font-size: 1.2rem;
-  font-weight: 600;
-  margin: 20px 0;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 22px 0;
 }
 
 /* BOTONES */
+
 .btn {
   width: 100%;
-  padding: 15px;
-  border-radius: 16px;
+  padding: 16px;
+  border-radius: 18px;
   border: 1px solid var(--border-soft);
   background: var(--btn-bg);
   cursor: pointer;
-  margin-bottom: 12px;
-  font-size: 0.95rem;
+  margin-bottom: 14px;
+  font-size: 1rem;
 }
 
 .btn:hover {
@@ -154,7 +178,7 @@ input {
 .btnSec {
   flex: 1;
   padding: 14px;
-  border-radius: 14px;
+  border-radius: 16px;
   border: 1px solid var(--border-soft);
   background: var(--btn-bg);
   cursor: pointer;
@@ -162,11 +186,11 @@ input {
 
 .adminRow {
   display: flex;
-  gap: 10px;
-  margin-bottom: 15px;
+  gap: 12px;
+  margin-bottom: 16px;
 }
 
 .historial {
-  font-size: 0.85rem;
-  line-height: 1.4;
+  font-size: 0.9rem;
+  line-height: 1.5;
 }
