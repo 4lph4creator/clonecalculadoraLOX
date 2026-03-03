@@ -72,11 +72,13 @@ function actualizarStockUI(){
   const idx = isotanqueActualIndex();
   const stockActual = stockPorIsotanque[idx] || 0;
 
+  // Valor grande del isotanque
   document.getElementById("stockIsotanque").textContent =
     stockActual.toFixed(2) + " m³";
 
+  // Stock total arriba
   document.getElementById("saldoRestante").textContent =
-    "Stock a bordo: " + totalBordo().toFixed(2) + " m³";
+    "Stock a bordo: " + totalBordo().toLocaleString("es-CL", {minimumFractionDigits:2}) + " m³";
 }
 
 // =====================
