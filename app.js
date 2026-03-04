@@ -45,7 +45,7 @@ function isotanqueActualIndex(){
 // CAMPAÑA
 // =====================
 function actualizarCargaTotalVisual(){
-  const total = stockPorIsotanque.reduce((a,b)=>a+b,0);
+  const total = totalBordo();
   const campo = document.getElementById("cargaTotalInicial");
   if(campo){
     campo.value = total.toLocaleString("es-CL");
@@ -82,11 +82,17 @@ function actualizarStockUI(){
   const idx = isotanqueActualIndex();
   const stockActual = stockPorIsotanque[idx] || 0;
 
-  document.getElementById("stockIsotanque").textContent =
-    stockActual.toLocaleString("es-CL",{minimumFractionDigits:2})+" m³";
+  const isoEl = document.getElementById("stockIsotanque");
+  if(isoEl){
+    isoEl.textContent =
+      stockActual.toLocaleString("es-CL",{minimumFractionDigits:2})+" m³";
+  }
 
-  document.getElementById("saldoRestante").textContent =
-    totalBordo().toLocaleString("es-CL",{minimumFractionDigits:2})+" m³";
+  const saldo = document.getElementById("saldoRestante");
+  if(saldo){
+    saldo.textContent =
+      totalBordo().toLocaleString("es-CL",{minimumFractionDigits:2})+" m³";
+  }
 
   actualizarColorIsotanque(stockActual);
 }
@@ -231,11 +237,37 @@ function nuevaCampana(){
 }
 
 // =====================
+// EXPORTAR
+// =====================
+function copiarHistorial(){
+  if(!historial.length) return alert("No hay descargas.");
+
+  let texto="Historial descargas LOX\n\n";
+  historial.forEach(r=>{
+    texto+=`${r.fecha} - ${r.centro} - Iso ${r.isotanque} - ${r.volumen.toFixed(2)} m³\n`;
+  });
+
+  const textarea = document.createElement("textarea");
+  textarea.value = texto;
+  document.body.appendChild(textarea);
+  textarea.select();
+  textarea.setSelectionRange(0, 99999);
+
+  try {
+    document.execCommand("copy");
+    alert("Historial copiado");
+  } catch (err) {
+    alert("No se pudo copiar");
+  }
+
+  document.body.removeChild(textarea);
+}
+
+// =====================
 // INICIO
 // =====================
 window.addEventListener("load",()=>{
 
-  // Rellenar inputs campaña desde storage
   ["saldoIso1","saldoIso2","saldoIso3","saldoIso4"].forEach((id,i)=>{
     const input=document.getElementById(id);
     if(input) input.value = stockPorIsotanque[i] || "";
@@ -245,13 +277,13 @@ window.addEventListener("load",()=>{
   actualizarStockUI();
   renderHistorial();
 
-  // Listeners
   document.getElementById("nivelA")?.addEventListener("input",actualizar);
   document.getElementById("nivelB")?.addEventListener("input",actualizar);
   document.getElementById("registrar")?.addEventListener("click",registrarPorTramo);
   document.getElementById("descargaCompleta")?.addEventListener("click",descargarIsotanqueCompleto);
   document.getElementById("rollback")?.addEventListener("click",rollback);
   document.getElementById("nuevaCampana")?.addEventListener("click",nuevaCampana);
+  document.getElementById("exportar")?.addEventListener("click",copiarHistorial);
   document.getElementById("isotanqueSelect")?.addEventListener("change",actualizarStockUI);
 
   ["saldoIso1","saldoIso2","saldoIso3","saldoIso4"].forEach(id=>{
