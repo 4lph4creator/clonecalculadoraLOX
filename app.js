@@ -19,8 +19,10 @@ const tabla = [
 // ESTADO
 // =====================
 let stockPorIsotanque = JSON.parse(localStorage.getItem("stockPorIsotanque")) ?? [0,0,0,0];
+let cargaInicial = JSON.parse(localStorage.getItem("cargaInicial")) ?? [0,0,0,0];
 let historial = JSON.parse(localStorage.getItem("historialDescargas")) ?? [];
 let ultimoTotal = 0;
+let campanaBloqueada = cargaInicial.some(v => v > 0);
 
 // =====================
 // UTILIDADES
@@ -29,70 +31,77 @@ function guardarStock(){
   localStorage.setItem("stockPorIsotanque", JSON.stringify(stockPorIsotanque));
 }
 
+function guardarCargaInicial(){
+  localStorage.setItem("cargaInicial", JSON.stringify(cargaInicial));
+}
+
 function guardarHistorial(){
   localStorage.setItem("historialDescargas", JSON.stringify(historial));
 }
 
 function totalBordo(){
-  return stockPorIsotanque.reduce((acc,n)=>acc+n,0);
+  return stockPorIsotanque.reduce((a,b)=>a+b,0);
 }
 
 function isotanqueActualIndex(){
-  return Number(document.getElementById("isotanqueSelect")?.value) - 1 || 0;
+  return Number(document.getElementById("isotanqueSelect").value)-1;
 }
 
 // =====================
 // CAMPAÑA
 // =====================
-function actualizarCargaTotalVisual(){
-  const total = totalBordo();
-  const campo = document.getElementById("cargaTotalInicial");
-  if(campo){
-    campo.value = total.toLocaleString("es-CL");
-  }
+function inicializarCampana(){
+
+  if(campanaBloqueada) return;
+
+  const v1 = Number(document.getElementById("saldoIso1").value)||0;
+  const v2 = Number(document.getElementById("saldoIso2").value)||0;
+  const v3 = Number(document.getElementById("saldoIso3").value)||0;
+  const v4 = Number(document.getElementById("saldoIso4").value)||0;
+
+  cargaInicial = [v1,v2,v3,v4];
+  stockPorIsotanque = [...cargaInicial];
+
+  guardarCargaInicial();
+  guardarStock();
+
+  bloquearInputsCampana();
+  actualizarStockUI();
 }
 
-function actualizarDesdeInputs(){
-  const v1 = Number(document.getElementById("saldoIso1")?.value) || 0;
-  const v2 = Number(document.getElementById("saldoIso2")?.value) || 0;
-  const v3 = Number(document.getElementById("saldoIso3")?.value) || 0;
-  const v4 = Number(document.getElementById("saldoIso4")?.value) || 0;
-
-  stockPorIsotanque = [v1,v2,v3,v4];
-  guardarStock();
-  actualizarStockUI();
-  actualizarCargaTotalVisual();
+function bloquearInputsCampana(){
+  ["saldoIso1","saldoIso2","saldoIso3","saldoIso4"].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el) el.readOnly=true;
+  });
+  campanaBloqueada=true;
 }
 
 // =====================
 // UI
 // =====================
 function actualizarColorIsotanque(valor){
-  const el = document.getElementById("stockIsotanque");
+
+  const el=document.getElementById("stockIsotanque");
   if(!el) return;
 
   el.classList.remove("iso-normal","iso-warning","iso-critical");
 
-  if(valor >= 4000) el.classList.add("iso-normal");
-  else if(valor >= 3000) el.classList.add("iso-warning");
+  if(valor>=4000) el.classList.add("iso-normal");
+  else if(valor>=3000) el.classList.add("iso-warning");
   else el.classList.add("iso-critical");
 }
 
 function actualizarStockUI(){
-  const idx = isotanqueActualIndex();
-  const stockActual = stockPorIsotanque[idx] || 0;
 
-  const isoEl = document.getElementById("stockIsotanque");
-  if(isoEl){
-    isoEl.textContent =
-      stockActual.toLocaleString("es-CL",{minimumFractionDigits:2})+" m³";
-  }
+  const idx=isotanqueActualIndex();
+  const stockActual=stockPorIsotanque[idx]||0;
 
-  const saldo = document.getElementById("saldoRestante");
-  if(saldo){
-    saldo.textContent =
-      totalBordo().toLocaleString("es-CL",{minimumFractionDigits:2})+" m³";
-  }
+  document.getElementById("stockIsotanque").textContent=
+    stockActual.toLocaleString("es-CL",{minimumFractionDigits:2})+" m³";
+
+  document.getElementById("saldoRestante").textContent=
+    totalBordo().toLocaleString("es-CL",{minimumFractionDigits:2})+" m³";
 
   actualizarColorIsotanque(stockActual);
 }
@@ -101,44 +110,51 @@ function actualizarStockUI(){
 // INTERPOLACIÓN
 // =====================
 function interpolar(mm){
+
   if(mm===""||isNaN(mm)) return null;
-  mm = Number(mm);
+
+  mm=Number(mm);
+
   if(mm < tabla[0].mm || mm > tabla[tabla.length-1].mm) return null;
 
   for(let i=0;i<tabla.length-1;i++){
+
     const a=tabla[i];
     const b=tabla[i+1];
+
     if(mm>=a.mm && mm<=b.mm){
+
       const r=(mm-a.mm)/(b.mm-a.mm);
+
       return a.m3 + r*(b.m3-a.m3);
     }
   }
+
   return null;
 }
 
 // =====================
-// CÁLCULO
+// CÁLCULO DESCARGA
 // =====================
 function actualizar(){
-  const A = interpolar(document.getElementById("nivelA")?.value);
-  const B = interpolar(document.getElementById("nivelB")?.value);
 
-  const m3A = document.getElementById("m3A");
-  const m3B = document.getElementById("m3B");
+  const A=interpolar(document.getElementById("nivelA").value);
+  const B=interpolar(document.getElementById("nivelB").value);
 
-  if(m3A) m3A.textContent = A!==null?A.toFixed(2)+" m³":"—";
-  if(m3B) m3B.textContent = B!==null?B.toFixed(2)+" m³":"—";
-
-  const resultado = document.getElementById("resultado");
+  document.getElementById("m3A").textContent=A?A.toFixed(2)+" m³":"—";
+  document.getElementById("m3B").textContent=B?B.toFixed(2)+" m³":"—";
 
   if(A!==null && B!==null){
-    ultimoTotal = Math.abs(A-B);
-    if(resultado)
-      resultado.textContent =
-        "Total descargado: "+ultimoTotal.toFixed(2)+" m³";
-  } else {
+
+    ultimoTotal=Math.abs(A-B);
+
+    document.getElementById("resultado").textContent=
+      "Total descargado: "+ultimoTotal.toFixed(2)+" m³";
+
+  }else{
+
     ultimoTotal=0;
-    if(resultado) resultado.textContent="Total descargado: —";
+    document.getElementById("resultado").textContent="Total descargado: —";
   }
 }
 
@@ -146,40 +162,47 @@ function actualizar(){
 // HISTORIAL
 // =====================
 function renderHistorial(){
-  const cont = document.getElementById("historial");
+
+  const cont=document.getElementById("historial");
   if(!cont) return;
-  cont.innerHTML = "";
+
+  cont.innerHTML="";
 
   [...historial].reverse().forEach(r=>{
-    const div = document.createElement("div");
-    div.textContent =
+
+    const div=document.createElement("div");
+
+    div.textContent=
       `${r.fecha} — ${r.centro} — Iso ${r.isotanque} — ${r.tipo} — ${r.volumen.toFixed(2)} m³`;
+
     cont.appendChild(div);
   });
 }
 
 // =====================
-// REGISTRAR
+// REGISTRAR DESCARGA
 // =====================
 function registrarDescarga(volumen,tipo){
-  if(volumen<=0) return;
 
-  const centro=document.getElementById("centro")?.value.trim();
+  if(!volumen || volumen<=0) return;
+
+  const centro=document.getElementById("centro").value.trim();
   if(!centro) return alert("Debes ingresar un centro.");
 
   const idx=isotanqueActualIndex();
-  const stockActual=stockPorIsotanque[idx]||0;
+  const stockActual=stockPorIsotanque[idx];
 
   if(volumen>stockActual){
-    if(!confirm("La descarga supera stock. ¿Cerrar isotanque?")) return;
-    volumen=stockActual;
+    alert("La descarga supera el stock restante.");
+    return;
   }
 
   stockPorIsotanque[idx]=stockActual-volumen;
+
   guardarStock();
 
   historial.push({
-    fecha:new Date().toISOString().slice(0,10),
+    fecha:new Date().toLocaleDateString("es-CL"),
     centro,
     isotanque:idx+1,
     tipo,
@@ -187,8 +210,8 @@ function registrarDescarga(volumen,tipo){
   });
 
   guardarHistorial();
+
   actualizarStockUI();
-  actualizarCargaTotalVisual();
   renderHistorial();
 }
 
@@ -196,11 +219,13 @@ function registrarPorTramo(){
   registrarDescarga(ultimoTotal,"tramo");
 }
 
-function descargarIsotanqueCompleto(){
+function descargarRestante(){
+
   const idx=isotanqueActualIndex();
-  const stockActual=stockPorIsotanque[idx]||0;
-  if(stockActual<=0) return alert("Sin stock.");
-  if(!confirm("¿Confirmar descarga completa?")) return;
+  const stockActual=stockPorIsotanque[idx];
+
+  if(stockActual<=0) return alert("Isotanque vacío.");
+
   registrarDescarga(stockActual,"completa");
 }
 
@@ -208,59 +233,43 @@ function descargarIsotanqueCompleto(){
 // ROLLBACK
 // =====================
 function rollback(){
+
   if(!historial.length) return alert("Nada que deshacer.");
 
-  const ultimo = historial.pop();
+  const ultimo=historial.pop();
+
   stockPorIsotanque[ultimo.isotanque-1]+=ultimo.volumen;
 
   guardarStock();
   guardarHistorial();
+
   actualizarStockUI();
-  actualizarCargaTotalVisual();
   renderHistorial();
 }
 
 // =====================
-// NUEVA CAMPAÑA
-// =====================
-function nuevaCampana(){
-  if(!confirm("¿Iniciar nueva campaña?")) return;
-
-  stockPorIsotanque=[0,0,0,0];
-  historial=[];
-
-  guardarStock();
-  guardarHistorial();
-  actualizarStockUI();
-  actualizarCargaTotalVisual();
-  renderHistorial();
-}
-
-// =====================
-// EXPORTAR
+// COPIAR HISTORIAL
 // =====================
 function copiarHistorial(){
+
   if(!historial.length) return alert("No hay descargas.");
 
   let texto="Historial descargas LOX\n\n";
+
   historial.forEach(r=>{
     texto+=`${r.fecha} - ${r.centro} - Iso ${r.isotanque} - ${r.volumen.toFixed(2)} m³\n`;
   });
 
-  const textarea = document.createElement("textarea");
-  textarea.value = texto;
+  const textarea=document.createElement("textarea");
+  textarea.value=texto;
   document.body.appendChild(textarea);
   textarea.select();
-  textarea.setSelectionRange(0, 99999);
 
-  try {
-    document.execCommand("copy");
-    alert("Historial copiado");
-  } catch (err) {
-    alert("No se pudo copiar");
-  }
+  document.execCommand("copy");
 
   document.body.removeChild(textarea);
+
+  alert("Historial copiado");
 }
 
 // =====================
@@ -270,23 +279,33 @@ window.addEventListener("load",()=>{
 
   ["saldoIso1","saldoIso2","saldoIso3","saldoIso4"].forEach((id,i)=>{
     const input=document.getElementById(id);
-    if(input) input.value = stockPorIsotanque[i] || "";
+    if(input) input.value=cargaInicial[i]||"";
   });
 
-  actualizarCargaTotalVisual();
+  if(campanaBloqueada) bloquearInputsCampana();
+
   actualizarStockUI();
   renderHistorial();
 
-  document.getElementById("nivelA")?.addEventListener("input",actualizar);
-  document.getElementById("nivelB")?.addEventListener("input",actualizar);
-  document.getElementById("registrar")?.addEventListener("click",registrarPorTramo);
-  document.getElementById("descargaCompleta")?.addEventListener("click",descargarIsotanqueCompleto);
-  document.getElementById("rollback")?.addEventListener("click",rollback);
-  document.getElementById("nuevaCampana")?.addEventListener("click",nuevaCampana);
-  document.getElementById("exportar")?.addEventListener("click",copiarHistorial);
-  document.getElementById("isotanqueSelect")?.addEventListener("change",actualizarStockUI);
+  document.getElementById("nivelA").addEventListener("input",actualizar);
+  document.getElementById("nivelB").addEventListener("input",actualizar);
 
-  ["saldoIso1","saldoIso2","saldoIso3","saldoIso4"].forEach(id=>{
-    document.getElementById(id)?.addEventListener("input",actualizarDesdeInputs);
+  document.getElementById("registrar").addEventListener("click",registrarPorTramo);
+  document.getElementById("descargaCompleta").addEventListener("click",descargarRestante);
+
+  document.getElementById("rollback").addEventListener("click",rollback);
+  document.getElementById("exportar").addEventListener("click",copiarHistorial);
+
+  document.getElementById("isotanqueSelect").addEventListener("change",function(){
+
+    const isoTitulo=document.getElementById("isoTitulo");
+    if(isoTitulo) isoTitulo.textContent="Isotanque "+this.value;
+
+    actualizarStockUI();
   });
+
+  document.getElementById("saldoIso1").addEventListener("change",inicializarCampana);
+  document.getElementById("saldoIso2").addEventListener("change",inicializarCampana);
+  document.getElementById("saldoIso3").addEventListener("change",inicializarCampana);
+  document.getElementById("saldoIso4").addEventListener("change",inicializarCampana);
 });
