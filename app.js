@@ -328,6 +328,7 @@ window.addEventListener("load",()=>{
   document.getElementById("rollback").addEventListener("click",rollback);
   document.getElementById("exportar").addEventListener("click",copiarHistorial);
   document.getElementById("nuevaCampana").addEventListener("click",nuevaCampana);
+  document.getElementById("iniciarCampana").addEventListener("click",iniciarCampana);
 
   document.getElementById("isotanqueSelect").addEventListener("change",function(){
 
@@ -338,7 +339,4 @@ window.addEventListener("load",()=>{
     actualizarStockUI();
   });
 
-  ["saldoIso1","saldoIso2","saldoIso3","saldoIso4"].forEach(id=>{
-    document.getElementById(id).addEventListener("change",iniciarCampana);
-  });
 });
